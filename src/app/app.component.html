@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span id="name" routerLink="/">Books Rent</span>
+        <img class="logo" src="">
+        <span class="spacer"></span>
+        <button *ngIf="router.url !== '/'" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+        <mat-menu  #menu="matMenu">
+            <button mat-menu-item routerLink="/">Logout</button>
+        </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

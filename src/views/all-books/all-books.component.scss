@@ -1,0 +1,30 @@
+@import '../../styles.scss';
+
+img {
+    width: 100px;
+    height: auto;
+}
+
+.box {
+    width: 900px;
+    max-width: 900px;
+}
+
+table {
+    width: 100%;
+}
+
+.book-title {
+    cursor: pointer;
+}
+
+.navi-buttons {
+    left: 415px;
+    margin: 5px;
+}
+
+
+.cdk-column-availability{
+    padding-left: 20px;
+}
+  

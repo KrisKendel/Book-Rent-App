@@ -1,0 +1,21 @@
+<div class="login-wrapper">
+
+    <mat-card class="box">
+        <mat-card-header>
+            <mat-card-title>Dashboard</mat-card-title>
+        </mat-card-header>
+        <h1>Hello User</h1>
+        <form class="example-form">
+            <mat-card-content>
+                <button mat-raised-button color="primary" routerLink="new-rental">New Rental</button>
+                <button mat-raised-button color="primary" routerLink="all-books">All Books</button>
+                <button mat-raised-button color="primary" routerLink="all-rentals">All Rentals</button>
+            </mat-card-content>
+            <p><strong>Number of library users: </strong></p>
+            <p><strong>Number of rented books: </strong>{{ rentedBooks }}</p>
+        </form>
+    </mat-card>
+</div>
+
+<router-outlet></router-outlet>
+

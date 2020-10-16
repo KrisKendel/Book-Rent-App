@@ -1,0 +1,37 @@
+<div class="login-wrapper">
+
+    <mat-card class="box">
+        <mat-card-header>
+            <mat-card-title>New Rent</mat-card-title>
+            <form [formGroup]="addRentalForm">
+                <mat-form-field class="example-full-width">
+                    <input type="text"
+                           placeholder="Book Title"
+                           matInput
+                           required
+                           [formControl]="myControl"
+                           [matAutocomplete]="auto">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let book of  availableBooks" [value]="book.title">
+                        {{ book.title }}
+                      </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field class="date-picker" appearance="fill">
+                <mat-label>Rent from date</mat-label>
+                <input matInput formControlName="dateFrom" [matDatepicker]="picker1" required>
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="date-picker" appearance="fill">
+                <mat-label>Rent to date</mat-label>
+                <input matInput formControlName="dateTo" [matDatepicker]="picker2" required>
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <button mat-raised-button routerLink="/dashboard" class="navi-buttons" color="primary">Rent</button>
+            <button mat-raised-button routerLink="/dashboard" class="navi-buttons">Cancel</button>
+            </form>
+        </mat-card-header>
+    </mat-card>
+</div>
