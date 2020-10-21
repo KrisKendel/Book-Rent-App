@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { StorageServiceModule } from 'ngx-webstorage-service';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,9 +12,11 @@ import { AllBooksComponent } from '../views/all-books/all-books.component';
 import { AllRentalsComponent } from '../views/all-rentals/all-rentals.component';
 import { NewRentalComponent } from '../views/new-rental/new-rental.component';
 import { BookEditComponent } from '../views/book-edit/book-edit.component';
+import { AllUsersComponent } from '../views/all-users/all-users.component';
 import { AddBookComponent } from '../components/add-book-modal/add-book.component';
 import { DeleteBookComponent } from '../components/delete-book-modal/delete-book.component';
 import { EditBookComponent } from '../components/edit-book-modal/edit-book.component';
+import { AuthGuard } from '../services/auth.guard';
 
 //Material
 
@@ -33,6 +35,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
+
 
 
 
@@ -47,7 +51,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     BookEditComponent,
     AddBookComponent,
     DeleteBookComponent,
-    EditBookComponent
+    EditBookComponent,
+    AllUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -70,10 +75,11 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    StorageServiceModule,
+    MatSelectModule
   ],
-  providers: [
-  ],
+  providers: [ AuthGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

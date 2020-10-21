@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router'; 
 import { AuthService } from '../../services/authentication/authentication.service';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+
 
 @Component({
   selector: 'app-login',
@@ -12,29 +13,22 @@ import { AuthService } from '../../services/authentication/authentication.servic
 
 export class LoginComponent implements OnInit {
   
-  public loginForm: FormGroup
-  loginUserData : {username: string, password:string}
+  public username: string;
+  public password: string;
   
-
-  constructor(private auth: AuthService,
-              private router: Router
-    ) {}
+  constructor(
+    @Inject(LOCAL_STORAGE) private storage: StorageService,
+    private auth: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    console.log(this.auth)
-    this.loginUserData = {username :'', password : ''}
+   
   }
-
-  loginUser() {
-    
-    this.auth.loginUser(this.loginUserData)
-     .subscribe(
-       res => {console.log(res)
-       localStorage.setItem('token', res.token)
-       this.router.navigate(['/dashboard'])
-      },
-       err => console.log(err)
-     )
-     
+  login() {
+    this.auth.getAuthToken(this.username, this.password).then(res => {
+      this.storage.set('user', res);
+      this.router.navigate(['dashboard'])
+    })
   }
 }

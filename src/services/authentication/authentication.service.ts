@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-
-
 @Injectable()
 export class AuthService {
 
@@ -11,7 +9,13 @@ export class AuthService {
     constructor(private http: HttpClient) {}
 
 
-    loginUser(user) {
-       return this.http.post<any>(this.loginUrl, user)
+    getAuthToken(username, password) {
+       return this.http.post(this.loginUrl, {"username":username, "password":password})
+        .toPromise()
+        .then(res =>{
+           return JSON.stringify(res)
+    }).catch((err) => {
+        console.log(err)
+    })
     }
 }

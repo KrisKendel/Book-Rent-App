@@ -5,16 +5,16 @@
             <mat-card-title>Login</mat-card-title>
         </mat-card-header>
 
-        <form class="example-form" #loginForm="ngForm">
+        <form class="example-form" (ngSubmit)="login()">
             <mat-card-content>
                 <mat-form-field class="form-field">
-                    <input matInput [(ngModel)]="loginUserData.username" name="username" type="text" placeholder="Username" class="form-control" required/>
+                    <input matInput  name="username" [(ngModel)]="username" type="text" placeholder="Username" class="form-control" required/>
                 </mat-form-field>
                 <mat-form-field class="form-field">
-                    <input matInput [(ngModel)]="loginUserData.password" name="password" type="password" placeholder="Password" class="form-control" required/>
+                    <input matInput  name="password" [(ngModel)]="password" type="password" placeholder="Password" class="form-control" required/>
                 </mat-form-field>
 
-                <button mat-raised-button (click)="loginUser()" [disabled]="loginForm.form.invalid" color="primary" class="btn-block" type="submit">Login</button>
+                <button mat-raised-button color="primary" class="btn-block" type="submit">Login</button>
             </mat-card-content>
         </form>
     </mat-card>

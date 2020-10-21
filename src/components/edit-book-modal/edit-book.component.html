@@ -3,32 +3,28 @@
       <h2 class="primary">Edit Book</h2>
     </div>
     <div>
-      <form [formGroup]="addEditForm">
-        <mat-grid-list cols="3" rowHeight="100px">
-          <mat-grid-tile>
-            <div class="text-inside">
-              <mat-form-field>
-                <input matInput placeholder="Book Title" value={{title}} formControlName="title" required>
-                <mat-error *ngIf="addEditForm.controls.title.hasError('required')">
-                  Please enter Book title
-                </mat-error>
-                <mat-error *ngIf="addEditForm.controls.title.hasError('pattern')">
-                  Please enter valid first name
-                </mat-error>
-              </mat-form-field>
-            </div>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <div class="text-inside">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Authors" value={{authors}} formControlName="authors" required>
-                <mat-error *ngIf="addEditForm.controls.authors.hasError('required')">
-                  Please enter Authors
-                </mat-error>
-              </mat-form-field>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
+      <form [formGroup]="addEditForm" *ngIf="addEditForm">
+        <div class="text-inside">
+          <mat-form-field>
+            <input matInput placeholder="Book Title" value={{bookEdit.title}} formControlName="title" maxlength="200" required>
+            <mat-error *ngIf="addEditForm.controls.title.hasError('required')">
+              Please enter Book title
+            </mat-error>
+            <mat-error *ngIf="addEditForm.controls.title.hasError('pattern')">
+              Please enter valid first name
+            </mat-error>
+          </mat-form-field>
+        </div>
+          
+        <div class="text-inside">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Authors" value={{authors}} formControlName="authors" required>
+            <mat-error *ngIf="addEditForm.controls.authors.hasError('required')">
+              Please enter Authors
+            </mat-error>
+          </mat-form-field>
+        </div>
+          
         <mat-form-field>
           <input matInput placeholder="Cover URL" value={{thumbnailUrl}} formControlName="thumbnailUrl" required>
           <mat-error *ngIf="addEditForm.controls.thumbnailUrl.hasError('required')">
@@ -36,17 +32,17 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <textarea matInput id="description" formControlName="description" placeholder="Description" name="description"
-            rows="10" cols="5">
+          <textarea matInput id="description" formControlName="shortDescription" placeholder="Description" name="description"
+            rows="10" cols="5" maxlength="4000">
       </textarea>
         </mat-form-field>
         <mat-form-field class="date-picker" appearance="fill">
           <mat-label>Book Publish date</mat-label>
-          <input matInput formControlName="date" [matDatepicker]="picker">
+          <input matInput formControlName="publishDate" [matDatepicker]="picker">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-        <mat-checkbox formControlName="availability" required>Available to rent*</mat-checkbox>
+        <mat-checkbox formControlName="availability">Available for rent</mat-checkbox>
   
         <div class="btn-sec">
           <button mat-raised-button type="submit" color="primary" [disabled]="!addEditForm.valid" class="Update-btn"

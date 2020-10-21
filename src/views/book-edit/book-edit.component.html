@@ -1,24 +1,19 @@
 <div class="login-wrapper">
-
     <mat-card class="box">
         <mat-card-header>
             <mat-card-title>Edit book</mat-card-title>
         </mat-card-header>
-
-        <form mat-form class="example-form">
-            <mat-card-content>
-                <img *ngIf="book.thumbnailUrl" src="{{ book.thumbnailUrl }}" alt="cover_image">
-                <h1>{{ book.title }}</h1>
-                <p><strong>Author/s:</strong> {{ book.authors }}</p>
-                <p><strong>Availability:</strong> {{ book.availability ? 'Available' : 'Rented'}}</p>
-                <p *ngIf="book.shortDescription"><strong>Description:</strong> {{ book.shortDescription }}</p>
-                <p *ngIf="book.categories"><strong>Catergory:</strong> {{ book.categories }}</p>
-                <button mat-raised-button color="primary" (click)="openEditModal()">Edit</button>
-                <button mat-raised-button color="primary" (click)="openDeleteModal()">Delete</button>
-                <button mat-raised-button routerLink="../../">Cancel</button>
-            </mat-card-content>
-        </form>
+        <mat-card-content *ngIf="fechedBook">
+            <img src="{{ fechedBook.thumbnailUrl }}" onError="this.src='../../assets/images/no-image.png'"
+                alt="cover_image">
+            <h1>{{ fechedBook.title }}</h1>
+            <p><strong>Author/s:</strong> {{ fechedBook.authors }}</p>
+            <p><strong>Availability:</strong> {{ fechedBook.availability ? 'Available' : 'Rented'}}</p>
+            <p *ngIf="fechedBook.shortDescription"><strong>Description:</strong> {{ fechedBook.shortDescription }}</p>
+            <p><strong>Publish date:</strong> {{ fechedBook.publishDate | date }}</p>
+            <button mat-raised-button color="primary" (click)="openEditModal()">Edit</button>
+            <button mat-raised-button color="primary" (click)="openDeleteModal()">Delete</button>
+            <button mat-raised-button routerLink="../../">Cancel</button>
+        </mat-card-content>
     </mat-card>
-
-    
-
+</div>

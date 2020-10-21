@@ -1,12 +1,11 @@
-import { Component, OnInit, OnDestroy, Output } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Book } from 'src/models/book';
-import { Subscription } from 'rxjs';
-import { BookService } from 'src/services/book-service/book.service';
-import { Location } from '@angular/common';
 import { DeleteBookComponent } from '../../components/delete-book-modal/delete-book.component';
 import { EditBookComponent } from '../../components/edit-book-modal/edit-book.component';
 import { MatDialog } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { BookService } from 'src/services/book-service/book.service';
 
 
 @Component({
@@ -14,54 +13,40 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './book-edit.component.html',
   styleUrls: ['./book-edit.component.scss']
 })
-export class BookEditComponent implements OnInit, OnDestroy {
+export class BookEditComponent implements OnInit{
  
   public book: any;
   public bookID: number;
-  public isLoading: boolean = false;
-  public bookRequest: Subscription;
+  public url: string;
+  public fechedBook: Book;
  
   constructor(
-    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private location: Location,
-    public dialog: MatDialog,
-    private bookService: BookService,
+    private dialog: MatDialog,
+    private http: HttpClient,
+    private bookService: BookService
   ) { }
 
   ngOnInit() {
+    this.url = this.bookService.url;
     this.bookID = this.activatedRoute.snapshot.params['bookID'];
     this.fetchBook(this.bookID);
-    console.log(this.bookID)
   }
 
-  async fetchBook(bookID) {
-    this.isLoading = true;
-
-     this.bookRequest = this.bookService
-      .getBook(bookID)
-      .subscribe((book: any)=> {
-        this.isLoading = false;
-        this.book = book;
-        }, (err) => {
-        this.router.navigate(['/404'], { skipLocationChange: true });
-      });
-    }
-     
-    openDeleteModal() {
-     this.dialog.open(DeleteBookComponent,{width: '640px',disableClose: true });
-    }
-
-    openEditModal() {
-      this.dialog.open(EditBookComponent,{width: '640px',disableClose: true });
-    }
-  
-
-  onDeleteBook() {}
-
-  ngOnDestroy(){
-    if(this.bookRequest)
-    this.bookRequest.unsubscribe();
+  private async fetchBook(bookID: number) {
+    await this.http.get<Book>(`${this.url}/${bookID}`).toPromise()
+    .then((book: Book) => {
+      this.fechedBook = book
+    }).catch(err => {
+      console.log(err)
+    });
   }
 
+  openDeleteModal() {
+    this.dialog.open(DeleteBookComponent,{width: '640px',disableClose: true,  data: { bookID: this.bookID }});
+  }
+
+  openEditModal() {
+    this.dialog.open(EditBookComponent,{width: '640px',disableClose: true, data: { bookID: this.bookID }});
+  }
 }

@@ -1,72 +1,85 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 import { BookService } from 'src/services/book-service/book.service';
+import { Book } from 'src/models/book';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-edit-book',
   templateUrl: './edit-book.component.html',
-  styleUrls: ['./edit-book.component.scss']
+  styleUrls: ['./edit-book.component.scss'],
+  providers: [DatePipe]
 })
 export class EditBookComponent implements OnInit {
-  public bookID: number
-  public book: any
-  public addEditForm: FormGroup
+  public bookIDValue: number;
+  public book: Book;
+  public bookFetch: any;
   public title: string;
   public authors: string;
-  public description: string;
-  public date: string;
-  public availability: boolean;
-  public newBook: {};
+  public shortDescription: string;
+  public publishDate: string;
+  public availability: boolean = false;
   public thumbnailUrl: string;
-
-  private activatedRoute: ActivatedRoute;
-  public bookRequest: Subscription;
-
-  url = ' http://localhost:3000/books';
+  public bookEdit: any;
+  public addEditForm: FormGroup;
+  public url: string = this.bookService.url;;
 
   constructor(
-   private formBuilder: FormBuilder,
-   private dialog: MatDialog,
-   private http: HttpClient,
-   private router: Router,
-   private bookService: BookService
+    @Inject(MAT_DIALOG_DATA) public bookID: Object,
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog,
+    private router: Router,
+    private bookService: BookService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
-     this.bookID = 4;
-     
-      this.bookRequest = this.bookService
-        .getBook(this.bookID)
-        .subscribe((book: any)=> {
-          this.book = book;
-          console.log(this.book.title)
-          }, (err) => {
-          this.router.navigate(['/404'], { skipLocationChange: true });
-        });
-      
-    this.addEditForm = this.formBuilder.group({
-      title: [this.title, [Validators.required, Validators.pattern('[a-zA-Z]+([a-zA-Z ]+)*')]],
-      authors: [this.authors, [Validators.required]],
-      description: [this.description],
-      date: [this.date],
-      availability: [this.availability],
-      thumbnailUrl: [this.thumbnailUrl, [Validators.required]]
-    });
+   for (let id in this.bookID) {
+      if (this.bookID.hasOwnProperty(id)) {
+        this.bookIDValue = this.bookID[id];
+        if (this.bookIDValue) {
+          this.bookFetch = this.fetchBook(this.bookIDValue);
+        }
+      }
+    }
   }
 
-  onEditBook() {}
+  private async fetchBook(bookID: number) {
+    this.bookFetch = await this.http.get<Book>(`${this.url}/${bookID}`).toPromise()
+      .then(book => {
+        this.bookEdit = book
+       
+        this.addEditForm = this.formBuilder.group({
+          title: [this.bookEdit.title, [Validators.required]],
+          publishDate: [this.bookEdit.publishDate],
+          thumbnailUrl: [this.bookEdit.thumbnailUrl, [Validators.required]],
+          shortDescription: [this.bookEdit.shortDescription],
+          authors: [this.bookEdit.authors, [Validators.required]],
+          availability: [this.bookEdit.availability]
+        });
+      }).catch(err => {
+        console.log(err)
+      })
+  }
+
+  public async onEditBook() {
+     await this.http.patch<Book>(`${this.url}/${this.bookIDValue}`, this.addEditForm.value)
+      .toPromise()
+      .then((book: Book) =>{
+        this.book = book;
+        this.router.navigateByUrl('/dashboard/all-books');
+      })
+      .catch(err =>{
+        console.log(err)
+      });
+  }
+
 
   closeDialog(): void {
     this.dialog.closeAll();
   }
-
-  ngOnDestroy() {
-    if(this.bookRequest)
-    this.bookRequest.unsubscribe();
-  }
-
 }

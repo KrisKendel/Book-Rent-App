@@ -1,11 +1,11 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <span id="name" routerLink="/">Books Rent</span>
-        <img class="logo" src="">
+        <span id="name" routerLink="dashboard">Books Rent</span>
+        <img class="logo" src="./../assets//images/books-icon.png">
         <span class="spacer"></span>
         <button *ngIf="router.url !== '/'" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
         <mat-menu  #menu="matMenu">
-            <button mat-menu-item routerLink="/">Logout</button>
+            <button mat-menu-item (click)="logout()" routerLink="/">Logout</button>
         </mat-menu>
     </mat-toolbar-row>
 </mat-toolbar>

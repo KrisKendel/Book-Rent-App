@@ -14,7 +14,7 @@
                 <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef> ID </th>
                     <td mat-cell *matCellDef="let rented">
-                        <h3>{{ rented.id }}</h3>
+                        <h3 class="id"><strong>{{ rented.id }}.</strong></h3>
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="authors">
@@ -30,9 +30,15 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="rented-to-date">
-                    <th mat-header-cell *matHeaderCellDef> Rented to Date </th>
+                    <th mat-header-cell *matHeaderCellDef> Available after </th>
                     <td mat-cell class="book-title" *matCellDef="let rented">
                         <h3>{{ rented.rentedTo | date }} </h3>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="user">
+                    <th mat-header-cell *matHeaderCellDef> User ID </th>
+                    <td mat-cell class="user" *matCellDef="let rented">
+                        <h3>{{ rented.userID }} </h3>
                     </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
