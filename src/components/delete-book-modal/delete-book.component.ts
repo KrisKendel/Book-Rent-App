@@ -14,7 +14,6 @@ import { HttpClient } from '@angular/common/http';
 export class DeleteBookComponent implements OnInit {
   
   public book: Book;
-  public deleteBookRequest: any;
   public bookIDValue: number;
   public url: string;
 
@@ -35,8 +34,8 @@ export class DeleteBookComponent implements OnInit {
     }
   }
 
-  onDeleteBook() {
-    this.deleteBookRequest = this.http.delete(`${this.url}/${this.bookIDValue}`).toPromise()
+  async onDeleteBook() {
+    await this.http.delete(`${this.url}/${this.bookIDValue}`).toPromise()
       .then(()=>{
         this.router.navigateByUrl('/dashboard/all-books');
       }).catch(err =>{

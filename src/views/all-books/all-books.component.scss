@@ -16,6 +16,13 @@ table {
 
 .book-title {
     cursor: pointer;
+    text-align: center;
+    &:hover {
+        background-color: grey;
+        opacity: 0.8;
+        color: white;
+        border-radius: 20px;
+    }
 }
 
 .navi-buttons {
@@ -28,3 +35,9 @@ table {
     padding-left: 20px;
 }
   
+.cover {
+    width: 80%;
+    height: auto;
+    margin-top: 10px;
+}
+

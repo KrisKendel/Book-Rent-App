@@ -16,6 +16,10 @@ import { AllUsersComponent } from '../views/all-users/all-users.component';
 import { AddBookComponent } from '../components/add-book-modal/add-book.component';
 import { DeleteBookComponent } from '../components/delete-book-modal/delete-book.component';
 import { EditBookComponent } from '../components/edit-book-modal/edit-book.component';
+import { DeleteUserComponent } from '../components/delete-user-modal/delete-user.component';
+import { CreateUserComponent } from '../components/create-user-modal/create-user.component';
+import { EditUserComponent } from '../views/user-edit/edit-user.component';
+import { EditUserModalComponent } from '../components/edit-user-modal/edit-user.component';
 import { AuthGuard } from '../services/auth.guard';
 
 //Material
@@ -38,8 +42,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +54,11 @@ import { MatSelectModule } from '@angular/material/select';
     AddBookComponent,
     DeleteBookComponent,
     EditBookComponent,
-    AllUsersComponent
+    AllUsersComponent,
+    DeleteUserComponent,
+    CreateUserComponent,
+    EditUserComponent,
+    EditUserModalComponent
   ],
   imports: [
     BrowserModule,

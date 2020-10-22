@@ -21,7 +21,7 @@ export class AddBookComponent implements OnInit {
   public thumbnailUrl: string;
   public rentedFrom: string;
   public availableAfter: string;
-  public url: string;
+  public url: string = this.bookService.url;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,7 +31,6 @@ export class AddBookComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.url = this.bookService.url;
     this.addCreateForm = this.formBuilder.group({
       title: [this.title, [Validators.required]],
       publishDate: [this.publishDate],

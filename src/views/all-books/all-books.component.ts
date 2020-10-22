@@ -1,44 +1,45 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BookService } from '../../services/book-service/book.service'
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { AddBookComponent } from '../../components/add-book-modal/add-book.component'
-import { MatDialog } from '@angular/material/dialog'
-
-
-import { Subscription } from 'rxjs';
+import { AddBookComponent } from '../../components/add-book-modal/add-book.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Book } from 'src/models/book';
-
-//import { Book } from 'src/models/books';
-
+import { HttpClient } from '@angular/common/http';
+import { BookService } from 'src/services/book-service/book.service';
 
 @Component({
   selector: 'app-all-books',
   templateUrl: './all-books.component.html',
   styleUrls: ['./all-books.component.scss']
 })
-export class AllBooksComponent implements OnInit, OnDestroy {
+export class AllBooksComponent implements OnInit {
 
-  books: any = {};
-  book: any = {};
-  displayedColumns: string[] = ['authors', 'title', 'cover', 'availability'];
-  dataSource: any = [];
-  booksSubscription: Subscription;
-  bookSubscription: Subscription;
+  public books: any = {};
+  public book: Book;
+  public displayedColumns: string[] = ['authors', 'title', 'cover', 'availability'];
+  public dataSource: any = [];
+  public bookEdit: any;
+  public data: any;
+  public url: string;
 
   constructor(
-      private bookService: BookService,
-      private dialog: MatDialog
-  ) 
-  { }
+      private dialog: MatDialog,
+      private http: HttpClient,
+      private bookService: BookService  
+  ) { }
 
   ngOnInit(): void {
-    this.booksSubscription = this.bookService.getBooks().subscribe
-      ((data) => {
-          this.books = data;
-          this.dataSource = new MatTableDataSource(this.books)
-      },
-        (error) => console.log(error)
-      )
+    this.url = this.bookService.url
+    this.getAllBooks()
+  }
+
+  private async getAllBooks() {
+    this.books = await this.http.get(`${this.url}`).toPromise()
+      .then(data => {
+        this.books = data;
+        this.dataSource = new MatTableDataSource(this.books);
+      }).catch(err => {
+        console.log(err)
+      })
   }
 
   applyFilter(event: Event) {
@@ -46,31 +47,7 @@ export class AllBooksComponent implements OnInit, OnDestroy {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  getBook(id: number) {
-    this.bookSubscription = this.bookService.getBook(id).subscribe
-      (
-        (data) => {
-          this.book = data;
-        },
-        (error) => console.log(error)
-      );
-  }
-
   openModal(): void {
-    const dialogRef = this.dialog.open(AddBookComponent,{
-      width: '640px',disableClose: true 
-    });
+   this.dialog.open(AddBookComponent,{ width: '640px',disableClose: true });
   }
-
-  ngOnDestroy() {
-    if(this.booksSubscription) {
-      this.booksSubscription.unsubscribe();
-    } 
-
-    if(this.bookSubscription) {
-      this.bookSubscription.unsubscribe();
-    }
-    
-  }
-
 }

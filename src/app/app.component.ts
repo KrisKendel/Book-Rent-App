@@ -19,6 +19,8 @@ export class AppComponent {
     @Inject(LOCAL_STORAGE) private storage: StorageService,) {}
 
   logout() {
+    this.userID = (JSON.parse(this.storage.get('user'))).id;
+    this.http.delete(`${this.loginUrl}/${this.userID}`).toPromise()
     this.storage.clear();
     this.router.navigate(['']);
   }
