@@ -24,16 +24,15 @@ export class NewRentalComponent implements OnInit {
   public books: any;
   public availableBooks: any[] = [];
   public url: string = this.bookService.url;
-  public usersUrl: 'http://localhost:3000/users';
-  public users;
+  public usersUrl = 'http://localhost:3000/users';
+  public users: any;
   public user: User;
 
 
   constructor(
     private formBuilder: FormBuilder,
     private bookService: BookService,
-    private http: HttpClient,
-    private router: Router,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
