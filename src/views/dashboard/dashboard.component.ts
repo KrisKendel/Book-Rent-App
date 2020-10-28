@@ -28,7 +28,8 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.admin = JSON.parse(this.storage.get('user'));
+    this.admin = this.storage.get('user');
+    console.log(this.admin);
     this.getAllRentedBooks();
     this.getAllUsers();
   }

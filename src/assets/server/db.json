@@ -15,8 +15,11 @@
       "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/adzic.jpg",
       "shortDescription": "About Specifications",
       "authors": "Gojko Adzic Mujkic",
-      "availability": true,
-      "id": 2
+      "availability": false,
+      "id": 2,
+      "userID": 47,
+      "rentedFrom": "2020-09-30T22:00:00.000Z",
+      "rentedTo": "2020-10-29T23:00:00.000Z"
     },
     {
       "title": "Flex 4 in Action",
@@ -167,7 +170,7 @@
       "id": 1
     },
     {
-      "username": "kiki",
+      "username": "riki",
       "password": "1234",
       "id": 2
     }

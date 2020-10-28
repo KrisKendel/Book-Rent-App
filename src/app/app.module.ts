@@ -20,6 +20,7 @@ import { DeleteUserComponent } from '../components/delete-user-modal/delete-user
 import { CreateUserComponent } from '../components/create-user-modal/create-user.component';
 import { EditUserComponent } from '../views/user-edit/edit-user.component';
 import { EditUserModalComponent } from '../components/edit-user-modal/edit-user.component';
+import { RegisterComponent } from '../views/register/register.component';
 import { AuthGuard } from '../services/auth.guard';
 
 // Material
@@ -41,7 +42,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +58,8 @@ import { MatSelectModule } from '@angular/material/select';
     DeleteUserComponent,
     CreateUserComponent,
     EditUserComponent,
-    EditUserModalComponent
+    EditUserModalComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

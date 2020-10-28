@@ -9,10 +9,12 @@ import { BookEditComponent } from 'src/views/book-edit/book-edit.component';
 import { AllUsersComponent } from 'src/views/all-users/all-users.component';
 import { EditUserComponent } from 'src/views/user-edit/edit-user.component';
 import { AuthGuard } from 'src/services/auth.guard';
+import { RegisterComponent } from 'src/views/register/register.component';
 
 
 const routes: Routes = [
   { path : '', component: LoginComponent },
+  { path : 'registration', component: RegisterComponent },
   { path : 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path : 'dashboard/all-books', component: AllBooksComponent, canActivate: [AuthGuard] },
   { path : 'dashboard/all-rentals', component: AllRentalsComponent, canActivate: [AuthGuard] },

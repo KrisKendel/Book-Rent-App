@@ -8,7 +8,7 @@ export class AuthService {
     constructor(private http: HttpClient) {}
 
 
-    getAuthToken(username, password): any {
+    async register(username, password): Promise<any> {
        return this.http.post(this.loginUrl, {username, password})
         .toPromise()
         .then(res => {
@@ -16,5 +16,15 @@ export class AuthService {
     }).catch((err) => {
         console.log(err);
     });
+    }
+
+    async login(): Promise<any> {
+        return this.http.get(this.loginUrl)
+         .toPromise()
+         .then(res => {
+             return res;
+         }).catch((err) => {
+             console.log(err);
+         });
     }
 }
