@@ -10,11 +10,11 @@ import { CreateUserComponent } from 'src/components/create-user-modal/create-use
   styleUrls: ['./all-users.component.scss']
 })
 export class AllUsersComponent implements OnInit {
-  public usersUrl: string = 'http://localhost:3000/users';
+  public usersUrl = 'http://localhost:3000/users';
   public users: any;
   public displayedColumns: string[] = ['firstName', 'lastName', 'dateCreate', 'deleteUser'];
   public dataSource: any = [];
-  public userID: number
+  public userID: number;
 
   constructor(
     private http: HttpClient,
@@ -25,18 +25,18 @@ export class AllUsersComponent implements OnInit {
     this.getAllUsers();
   }
 
-  public async getAllUsers() {
+  public async getAllUsers(): Promise<void> {
     await this.http.get(`${this.usersUrl}`).toPromise()
       .then((users) => {
         this.users = users;
         this.dataSource = new MatTableDataSource(this.users);
       })
      .catch(err => {
-        console.log(err)
-     })
+        console.log(err);
+     });
   }
-  
-  openCreateModal() {
-    this.dialog.open(CreateUserComponent,{ width: '640px',disableClose: true });
+
+  openCreateModal(): void {
+    this.dialog.open(CreateUserComponent, { width: '640px', disableClose: true });
   }
 }

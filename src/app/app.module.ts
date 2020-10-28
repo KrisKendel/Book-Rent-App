@@ -22,7 +22,7 @@ import { EditUserComponent } from '../views/user-edit/edit-user.component';
 import { EditUserModalComponent } from '../components/edit-user-modal/edit-user.component';
 import { AuthGuard } from '../services/auth.guard';
 
-//Material
+// Material
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';

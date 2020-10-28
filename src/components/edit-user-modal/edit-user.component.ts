@@ -12,7 +12,7 @@ import { User } from '../../models/user';
 })
 export class EditUserModalComponent implements OnInit {
   public userFetch: any;
-  public usersUrl: string = 'http://localhost:3000/users';
+  public usersUrl = 'http://localhost:3000/users';
   public userEdit: any;
   public addEditForm: FormGroup;
   public userID: number;
@@ -22,16 +22,15 @@ export class EditUserModalComponent implements OnInit {
   public dateCreate: Date;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public user: Object,
+    @Inject(MAT_DIALOG_DATA) public user: object,
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private router: Router,
     private http: HttpClient,
-    
   ) { }
 
   ngOnInit(): void {
-    for (let id in this.user) {
+    for (const id in this.user) {
       if (this.user.hasOwnProperty(id)) {
         this.userID = this.user[id];
         if (this.userID) {
@@ -41,10 +40,10 @@ export class EditUserModalComponent implements OnInit {
     }
   }
 
-  private async fetchUser(userID: number){
+  private async fetchUser(userID: number): Promise<void> {
     this.userFetch = await this.http.get<User>(`${this.usersUrl}/${userID}`).toPromise()
      .then(user => {
-       this.userEdit = user
+       this.userEdit = user;
 
        this.addEditForm = this.formBuilder.group({
          firstName: [this.userEdit.firstName, [Validators.required]],
@@ -52,24 +51,22 @@ export class EditUserModalComponent implements OnInit {
          dateCreate: [this.userEdit.dateCreate, [Validators.required]]
        });
       }).catch(err => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
 
-  public async onEditUser() {
+  public async onEditUser(): Promise <void> {
     await this.http.patch<User>(`${this.usersUrl}/${this.userID}`, this.addEditForm.value)
      .toPromise()
-     .then((user: User) =>{
+     .then((user: User) => {
        this.userEdited = user;
        this.router.navigateByUrl('/dashboard/all-users');
      })
-     .catch(err =>{
-       console.log(err)
+     .catch(err => {
+       console.log(err);
      });
  }
 
-
-  closeDialog(): void {
+ closeDialog(): void {
     this.dialog.closeAll();
-  }
-}
+}}

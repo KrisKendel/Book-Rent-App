@@ -24,30 +24,30 @@ export class AllBooksComponent implements OnInit {
   constructor(
       private dialog: MatDialog,
       private http: HttpClient,
-      private bookService: BookService  
+      private bookService: BookService
   ) { }
 
   ngOnInit(): void {
-    this.url = this.bookService.url
-    this.getAllBooks()
+    this.url = this.bookService.url;
+    this.getAllBooks();
   }
 
-  private async getAllBooks() {
+  private async getAllBooks(): Promise<void> {
     this.books = await this.http.get(`${this.url}`).toPromise()
       .then(data => {
         this.books = data;
         this.dataSource = new MatTableDataSource(this.books);
       }).catch(err => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
 
-  applyFilter(event: Event) {
+  applyFilter(event: Event): any {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   openModal(): void {
-   this.dialog.open(AddBookComponent,{ width: '640px',disableClose: true });
+   this.dialog.open(AddBookComponent, { width: '640px', disableClose: true });
   }
 }

@@ -16,7 +16,7 @@ export class AddBookComponent implements OnInit {
   public authors: Array<string>;
   public shortDescription: string;
   public publishDate: string;
-  public availability: boolean = true;
+  public availability = true;
   public newBook: Book;
   public thumbnailUrl: string;
   public rentedFrom: string;
@@ -40,9 +40,9 @@ export class AddBookComponent implements OnInit {
       availability: [this.availability]
     });
   }
-  public async onCreateBook() {
+  public async onCreateBook(): Promise<void> {
      this.newBook = this.addCreateForm.value;
-    await this.http.post(this.url, this.newBook).toPromise()
+     await this.http.post(this.url, this.newBook).toPromise();
   }
 
   closeDialog(): void {

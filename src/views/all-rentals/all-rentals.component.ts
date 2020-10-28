@@ -21,28 +21,28 @@ export class AllRentalsComponent implements OnInit {
     private http: HttpClient,
     private bookService: BookService
   ) { }
-   
+
   ngOnInit(): void {
-    this.url = this.bookService.url
-    this.getAllBooks()
+    this.url = this.bookService.url;
+    this.getAllBooks();
   }
 
-  private async getAllBooks() {
+  private async getAllBooks(): Promise<void> {
     this.allBooks = await this.http.get<Book>(this.url).toPromise()
       .then(data => {
         this.allBooks = data;
-        for(let book of this.allBooks) {
-          if(book.availability === false) {
-             this.rentedBooks.push(book)
+        for (const book of this.allBooks) {
+          if (book.availability === false) {
+             this.rentedBooks.push(book);
           }
         }
-       this.dataSource = new MatTableDataSource(this.rentedBooks)
+        this.dataSource = new MatTableDataSource(this.rentedBooks);
       }).catch(err => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
 
-  applyFilter(event: Event) {
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

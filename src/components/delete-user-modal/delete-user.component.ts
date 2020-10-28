@@ -9,33 +9,31 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./delete-user.component.scss']
 })
 export class DeleteUserComponent implements OnInit {
-  public usersUrl: string = 'http://localhost:3000/users';
+  public usersUrl = 'http://localhost:3000/users';
   public userIDValue: number;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public user: Object,
+    @Inject(MAT_DIALOG_DATA) public user: object,
     private http: HttpClient,
     private router: Router,
     private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
-    for(let id in this.user){
-      
-      if(this.user.hasOwnProperty(id)) {
-        this.userIDValue = this.user[id]
-        console.log(this.userIDValue)
+    for (const id in this.user){
+      if (this.user.hasOwnProperty(id)) {
+        this.userIDValue = this.user[id];
       }
     }
   }
 
-  public async onDeleteUser() {
+  public async onDeleteUser(): Promise<void> {
     await this.http.delete(`${this.usersUrl}/${this.userIDValue}`).toPromise()
       .then(() => {
         this.router.navigateByUrl('/dashboard/all-users');
-      }).catch(err =>{
+      }).catch(err => {
         console.log(err);
-      })
+      });
   }
 
   closeDialog(): void {

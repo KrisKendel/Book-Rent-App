@@ -11,13 +11,13 @@ constructor(
 ) { }
 
 public canActivate(): boolean {
-  if(this.storage.get('user')) {
-    return true
+  if (this.storage.get('user')) {
+    return true;
   }
   else {
-    alert("Not logged in!")
-  this.router.navigate(['']);
-  return false
+    alert('Not logged in!');
+    this.router.navigate(['']);
+    return false;
   }
   }
 }

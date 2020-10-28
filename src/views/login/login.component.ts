@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/authentication/authentication.service';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
@@ -12,23 +12,20 @@ import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 })
 
 export class LoginComponent implements OnInit {
-  
   public username: string;
   public password: string;
-  
   constructor(
     @Inject(LOCAL_STORAGE) private storage: StorageService,
     private auth: AuthService,
     private router: Router
   ) { }
 
-  ngOnInit() {
-   
-  }
-  login() {
+  ngOnInit(): void {}
+
+  login(): void {
     this.auth.getAuthToken(this.username, this.password).then(res => {
       this.storage.set('user', res);
-      this.router.navigate(['dashboard'])
-    })
+      this.router.navigate(['dashboard']);
+    });
   }
 }

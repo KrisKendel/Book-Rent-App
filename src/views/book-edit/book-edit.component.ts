@@ -14,12 +14,12 @@ import { BookService } from 'src/services/book-service/book.service';
   styleUrls: ['./book-edit.component.scss']
 })
 export class BookEditComponent implements OnInit{
- 
+
   public book: any;
   public bookID: number;
   public url: string;
   public fechedBook: Book;
- 
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
@@ -27,26 +27,26 @@ export class BookEditComponent implements OnInit{
     private bookService: BookService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.url = this.bookService.url;
-    this.bookID = this.activatedRoute.snapshot.params['bookID'];
+    this.bookID = this.activatedRoute.snapshot.params.bookID;
     this.fetchBook(this.bookID);
   }
 
-  private async fetchBook(bookID: number) {
+  private async fetchBook(bookID: number): Promise<void> {
     await this.http.get<Book>(`${this.url}/${bookID}`).toPromise()
     .then((book: Book) => {
-      this.fechedBook = book
+      this.fechedBook = book;
     }).catch(err => {
-      console.log(err)
+      console.log(err);
     });
   }
 
-  openDeleteModal() {
-    this.dialog.open(DeleteBookComponent,{width: '640px',disableClose: true,  data: { bookID: this.bookID }});
+  openDeleteModal(): void {
+    this.dialog.open(DeleteBookComponent, {width: '640px', disableClose: true,  data: { bookID: this.bookID }});
   }
 
-  openEditModal() {
-    this.dialog.open(EditBookComponent,{width: '640px',disableClose: true, data: { bookID: this.bookID }});
+  openEditModal(): void {
+    this.dialog.open(EditBookComponent, {width: '640px', disableClose: true, data: { bookID: this.bookID }});
   }
 }

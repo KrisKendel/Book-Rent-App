@@ -10,11 +10,11 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent implements OnInit {
-  public usersUrl: string = 'http://localhost:3000/users';
+  public usersUrl = 'http://localhost:3000/users';
   public addCreateForm: FormGroup;
   public firstName: string;
   public lastName: string;
-  public dateCreated: string
+  public dateCreated: string;
   public newUser: User;
 
   constructor(
@@ -31,9 +31,9 @@ export class CreateUserComponent implements OnInit {
     });
   }
 
-  public async onCreateUser() {
+  public async onCreateUser(): Promise<void> {
     this.newUser = this.addCreateForm.value;
-   await this.http.post(this.usersUrl, this.newUser).toPromise()
+    await this.http.post(this.usersUrl, this.newUser).toPromise();
  }
 
  closeDialog(): void {

@@ -165,6 +165,11 @@
       "username": "Kristijan",
       "password": "12344",
       "id": 1
+    },
+    {
+      "username": "kiki",
+      "password": "1234",
+      "id": 2
     }
   ],
   "users": [

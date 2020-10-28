@@ -22,14 +22,14 @@ export class EditBookComponent implements OnInit {
   public authors: string;
   public shortDescription: string;
   public publishDate: string;
-  public availability: boolean = false;
+  public availability = false;
   public thumbnailUrl: string;
   public bookEdit: any;
   public addEditForm: FormGroup;
-  public url: string = this.bookService.url;;
+  public url: string = this.bookService.url;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public bookID: Object,
+    @Inject(MAT_DIALOG_DATA) public bookID: object,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private router: Router,
@@ -38,7 +38,7 @@ export class EditBookComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-   for (let id in this.bookID) {
+   for (const id in this.bookID) {
       if (this.bookID.hasOwnProperty(id)) {
         this.bookIDValue = this.bookID[id];
         if (this.bookIDValue) {
@@ -48,11 +48,10 @@ export class EditBookComponent implements OnInit {
     }
   }
 
-  private async fetchBook(bookID: number) {
+  private async fetchBook(bookID: number): Promise<void> {
     this.bookFetch = await this.http.get<Book>(`${this.url}/${bookID}`).toPromise()
       .then(book => {
-        this.bookEdit = book
-       
+        this.bookEdit = book;
         this.addEditForm = this.formBuilder.group({
           title: [this.bookEdit.title, [Validators.required]],
           publishDate: [this.bookEdit.publishDate],
@@ -62,22 +61,21 @@ export class EditBookComponent implements OnInit {
           availability: [this.bookEdit.availability]
         });
       }).catch(err => {
-        console.log(err)
-      })
-  }
-
-  public async onEditBook() {
-     await this.http.patch<Book>(`${this.url}/${this.bookIDValue}`, this.addEditForm.value)
-      .toPromise()
-      .then((book: Book) =>{
-        this.book = book;
-        this.router.navigateByUrl('/dashboard/all-books');
-      })
-      .catch(err =>{
-        console.log(err)
+        console.log(err);
       });
   }
 
+  public async onEditBook(): Promise <void> {
+     await this.http.patch<Book>(`${this.url}/${this.bookIDValue}`, this.addEditForm.value)
+      .toPromise()
+      .then((book: Book) => {
+        this.book = book;
+        this.router.navigateByUrl('/dashboard/all-books');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   closeDialog(): void {
     this.dialog.closeAll();

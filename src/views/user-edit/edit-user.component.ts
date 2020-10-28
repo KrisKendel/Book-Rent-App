@@ -12,37 +12,36 @@ import { EditUserModalComponent } from '../../components/edit-user-modal/edit-us
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-  public usersUrl: string = 'http://localhost:3000/users';
+  public usersUrl = 'http://localhost:3000/users';
   public userID: number;
   public fetchedUser: User;
-  
+
   constructor(
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog
   ) { }
 
-  ngOnInit() {
-    
-    this.userID = this.activatedRoute.snapshot.params['userID'];
+  ngOnInit(): void {
+    this.userID = this.activatedRoute.snapshot.params.userID;
     this.fetchUser(this.userID);
   }
 
-  private async fetchUser(userID: number) {
+  private async fetchUser(userID: number): Promise<void> {
     await this.http.get<User>(`${this.usersUrl}/${userID}`).toPromise()
     .then((user: User) => {
-      this.fetchedUser = user
+      this.fetchedUser = user;
     }).catch(err => {
-      console.log(err)
+      console.log(err);
     });
   }
 
-  openEditModal() {
-    this.dialog.open(EditUserModalComponent,{width: '640px',disableClose: true, data: { userID: this.userID }});
+  openEditModal(): void {
+    this.dialog.open(EditUserModalComponent, {width: '640px', disableClose: true, data: { userID: this.userID }});
   }
 
-  openDeleteModal() {
-    this.dialog.open(DeleteUserComponent,{width: '640px',disableClose: true,  data: { userID: this.userID }});
+  openDeleteModal(): void {
+    this.dialog.open(DeleteUserComponent, {width: '640px', disableClose: true,  data: { userID: this.userID }});
   }
 
 }

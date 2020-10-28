@@ -10,17 +10,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'books-app';
-  public loginUrl = "http://localhost:3000/login";
+  public loginUrl = 'http://localhost:3000/login';
   public userID: number;
 
   constructor(
     public router: Router,
     public http: HttpClient,
-    @Inject(LOCAL_STORAGE) private storage: StorageService,) {}
+    @Inject(LOCAL_STORAGE) private storage: StorageService, ) {}
 
-  logout() {
+  logout(): void {
     this.userID = (JSON.parse(this.storage.get('user'))).id;
-    this.http.delete(`${this.loginUrl}/${this.userID}`).toPromise()
+    this.http.delete(`${this.loginUrl}/${this.userID}`).toPromise();
     this.storage.clear();
     this.router.navigate(['']);
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router} from '@angular/router';
-import { BookService } from '../../services/book-service/book.service'
+import { BookService } from '../../services/book-service/book.service';
 import { Book } from 'src/models/book';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
@@ -12,13 +12,12 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./delete-book.component.scss']
 })
 export class DeleteBookComponent implements OnInit {
-  
   public book: Book;
   public bookIDValue: number;
   public url: string;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public bookID: Object,
+    @Inject(MAT_DIALOG_DATA) public bookID: object,
     private dialog: MatDialog,
     private router: Router,
     private bookService: BookService,
@@ -27,20 +26,20 @@ export class DeleteBookComponent implements OnInit {
 
   ngOnInit(): void {
     this.url = this.bookService.url;
-    for(let id in this.bookID){
-      if(this.bookID.hasOwnProperty(id)){
-        this.bookIDValue = this.bookID[id]
+    for (const id in this.bookID){
+      if (this.bookID.hasOwnProperty(id)){
+        this.bookIDValue = this.bookID[id];
       }
     }
   }
 
-  async onDeleteBook() {
+  async onDeleteBook(): Promise<void> {
     await this.http.delete(`${this.url}/${this.bookIDValue}`).toPromise()
-      .then(()=>{
+      .then(() => {
         this.router.navigateByUrl('/dashboard/all-books');
-      }).catch(err =>{
+      }).catch(err => {
         console.log(err);
-      })
+      });
   }
 
   closeDialog(): void {
