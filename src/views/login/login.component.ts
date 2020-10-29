@@ -26,15 +26,13 @@ export class LoginComponent implements OnInit {
     this.auth.login().then(res => {
       for (const user of res) {
         if (this.username === user.username && this.password === user.password) {
-          console.log('Uspjesno!!');
           this.storage.set('user', user);
           this.router.navigate(['dashboard']);
-        }
-        else {
-          console.log('neuspjesno!!');
-          alert('User does not exist, please register!!');
-        }
-      }
+        }}
+        // else {
+        //   console.log('neuspjesno!!');
+        //   alert('User does not exist, please register!!');
+        // }
     });
   }
 }
