@@ -13,13 +13,13 @@ import { RegisterComponent } from 'src/views/register/register.component';
 
 
 const routes: Routes = [
-  { path : '', component: LoginComponent },
-  { path : 'registration', component: RegisterComponent },
-  { path : 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path : 'dashboard/all-books', component: AllBooksComponent, canActivate: [AuthGuard] },
-  { path : 'dashboard/all-rentals', component: AllRentalsComponent, canActivate: [AuthGuard] },
-  { path : 'dashboard/new-rental', component: NewRentalComponent, canActivate: [AuthGuard] },
-  { path : 'dashboard/all-users', component: AllUsersComponent, canActivate: [AuthGuard] },
+  { path : '', component: LoginComponent, data: {animation: 'login'}},
+  { path : 'registration', component: RegisterComponent, data: {animation: 'register'}},
+  { path : 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], data: {animation: 'dashboard'}},
+  { path : 'dashboard/all-books', component: AllBooksComponent, canActivate: [AuthGuard], data: {animation: 'allBooks'}},
+  { path : 'dashboard/all-rentals', component: AllRentalsComponent, canActivate: [AuthGuard], data: {animation: 'allRentals'}},
+  { path : 'dashboard/new-rental', component: NewRentalComponent, canActivate: [AuthGuard], data: {animation: 'newRental'}},
+  { path : 'dashboard/all-users', component: AllUsersComponent, canActivate: [AuthGuard], data: {animation: 'allUsers'}},
   { path : 'dashboard/all-books/:bookID/edit-book', component: BookEditComponent, canActivate: [AuthGuard] },
   { path : 'dashboard/all-users/:userID/edit-user', component: EditUserComponent, canActivate: [AuthGuard] }
 ];

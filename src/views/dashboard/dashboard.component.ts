@@ -3,11 +3,16 @@ import { Book } from 'src/models/book';
 import { HttpClient } from '@angular/common/http';
 import { BookService } from 'src/services/book-service/book.service';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { RouterOutlet } from '@angular/router';
+import { fader } from '../../app/route-animations';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  animations: [
+    fader,
+ ]
 })
 export class DashboardComponent implements OnInit {
   public rentedBooks = 0;
@@ -58,5 +63,9 @@ export class DashboardComponent implements OnInit {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  prepareRoute(outlet: RouterOutlet): void {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 }

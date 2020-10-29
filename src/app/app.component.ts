@@ -1,12 +1,16 @@
 import { Component, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+import { fader } from '../app/route-animations';
 import { StorageService, LOCAL_STORAGE } from 'ngx-webstorage-service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+     fader,
+  ]
 })
 export class AppComponent {
   title = 'books-app';
@@ -20,8 +24,11 @@ export class AppComponent {
 
   logout(): void {
     this.userID = (this.storage.get('user')).id;
-    // this.http.delete(`${this.loginUrl}/${this.userID}`).toPromise();
     this.storage.clear();
     this.router.navigate(['']);
+  }
+
+  prepareRoute(outlet: RouterOutlet): void {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 }
