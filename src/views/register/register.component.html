@@ -5,7 +5,7 @@
             <mat-card-title>Registration</mat-card-title>
         </mat-card-header>
 
-        <form class="example-form" (ngSubmit)="register()">
+        <form class="example-form" #loginForm="ngForm" (ngSubmit)="register()">
             <mat-card-content>
                 <mat-form-field class="form-field">
                     <input matInput  name="username" type="text" [(ngModel)]="username"  placeholder="Username" class="form-control" required/>
@@ -14,7 +14,7 @@
                     <input matInput  name="password" type="password" [(ngModel)]="password" placeholder="Password" class="form-control" required/>
                 </mat-form-field>
 
-                <button mat-raised-button color="primary" class="btn-block" type="submit">Register</button>
+                <button mat-raised-button color="primary" class="btn-block" [disabled]="loginForm.form.invalid" type="submit">Register</button>
             </mat-card-content>
         </form>
         <button mat-raised-button color="primary" class="btn-block" routerLink="">Back</button>

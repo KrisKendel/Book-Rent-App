@@ -20,7 +20,7 @@ export class AppComponent {
 
   logout(): void {
     this.userID = (this.storage.get('user')).id;
-    this.http.delete(`${this.loginUrl}/${this.userID}`).toPromise();
+    // this.http.delete(`${this.loginUrl}/${this.userID}`).toPromise();
     this.storage.clear();
     this.router.navigate(['']);
   }

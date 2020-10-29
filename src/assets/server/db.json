@@ -141,8 +141,11 @@
       "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/barlotta3.jpg",
       "shortDescription": "Taming Jaguar",
       "authors": "Michael J. Barlotta, Jason R. Weiss",
-      "availability": true,
-      "id": 16
+      "availability": false,
+      "id": 16,
+      "userID": 48,
+      "rentedFrom": "2020-10-09T22:00:00.000Z",
+      "rentedTo": "2020-10-30T23:00:00.000Z"
     },
     {
       "title": "3D User Interfaces with Java 3D",
@@ -165,14 +168,14 @@
   ],
   "login": [
     {
-      "username": "Kristijan",
-      "password": "12344",
-      "id": 1
-    },
-    {
       "username": "riki",
       "password": "1234",
       "id": 2
+    },
+    {
+      "username": "mixy09",
+      "password": "12345",
+      "id": 3
     }
   ],
   "users": [
@@ -199,6 +202,12 @@
       "lastName": "Johnson",
       "dateCreate": "2020-10-12T22:00:00.000Z",
       "id": 49
+    },
+    {
+      "firstName": "Miljenko",
+      "lastName": "asdsad",
+      "dateCreate": "2020-10-15T22:00:00.000Z",
+      "id": 50
     }
   ]
 }

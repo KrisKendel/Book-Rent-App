@@ -14,25 +14,31 @@ import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 export class LoginComponent implements OnInit {
   public username: string;
   public password: string;
+  public isLoggined = false;
+  public isSubmitted = false;
+
   constructor(
     @Inject(LOCAL_STORAGE) private storage: StorageService,
     private auth: AuthService,
     private router: Router
   ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   login(): void {
     this.auth.login().then(res => {
       for (const user of res) {
         if (this.username === user.username && this.password === user.password) {
+          this.isLoggined = true;
+          this.isSubmitted = true;
           this.storage.set('user', user);
-          this.router.navigate(['dashboard']);
-        }}
-        // else {
-        //   console.log('neuspjesno!!');
-        //   alert('User does not exist, please register!!');
-        // }
+          return this.router.navigate(['dashboard']);
+        }
+        else {
+          this.isSubmitted = true;
+          this.isLoggined = false;
+        }
+      }
     });
   }
 }

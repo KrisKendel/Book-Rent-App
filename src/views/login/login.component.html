@@ -5,7 +5,7 @@
             <mat-card-title>Login</mat-card-title>
         </mat-card-header>
 
-        <form class="example-form" (ngSubmit)="login()">
+        <form class="example-form" #loginForm="ngForm" (ngSubmit)="login()">
             <mat-card-content>
                 <mat-form-field class="form-field">
                     <input matInput  name="username" [(ngModel)]="username" type="text" placeholder="Username" class="form-control" required/>
@@ -13,10 +13,10 @@
                 <mat-form-field class="form-field">
                     <input matInput  name="password" [(ngModel)]="password" type="password" placeholder="Password" class="form-control" required/>
                 </mat-form-field>
-
-                <button mat-raised-button color="primary" class="btn-block" type="submit">Login</button>
+                <mat-error *ngIf="isSubmitted && !isLoggined">The username or password is incorrect!</mat-error>
+                <button mat-raised-button color="primary" class="btn-block" [disabled]="loginForm.form.invalid" type="submit">Login</button>
             </mat-card-content>
         </form>
-        <button mat-raised-button color="primary" class="btn-block" routerLink="registration">Register</button>
+        <button mat-raised-button color="primary" class="btn-block"  routerLink="registration">Register</button>
     </mat-card>
 </div>
