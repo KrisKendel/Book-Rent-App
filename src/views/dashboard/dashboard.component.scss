@@ -8,24 +8,28 @@
         max-width: 400px;
         width: 100%;
     }
+
+    .box {
+        width: 1000px;
+        max-width: 1000px;
+    }
     
     .form-field, .btn-block {
         width: 100%;
         margin-bottom: 10px;
     }
 
+    mat-card-content {
+        width: 700px;
+    }
+
+   
     mat-card-header {
         text-align: center;
         width: 100%;
         display: block;
         font-weight: 700;
-
-        mat-card-title {
-            font-size: 30px;
-            margin: 0;
-            padding-bottom: 20px;
-        }
-    }
+}
 
     .mat-card {
         padding: 40px 70px 50px;
@@ -43,7 +47,7 @@
     padding: 60px 50px 40px 50px;
     background: lightgrey;
     border-radius: 30px;
-    max-width: 400px;
+    max-width: 800px;
     box-shadow: $box-shadow;
     -moz-box-shadow: $box-shadow;
     -webkit-box-shadow: $box-shadow;

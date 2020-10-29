@@ -16,6 +16,7 @@ import { fader } from '../../app/route-animations';
 })
 export class DashboardComponent implements OnInit {
   public rentedBooks = 0;
+  public allBooks = 0;
   public books: any;
   public url: string = this.bookService.url;
   public book: Book;
@@ -43,6 +44,7 @@ export class DashboardComponent implements OnInit {
       .then(data => {
         this.books = data;
         for (this.book of this.books) {
+          this.allBooks++;
           if (this.book.availability === false) {
             this.rentedBooks++;
           }

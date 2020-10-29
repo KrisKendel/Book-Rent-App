@@ -4,17 +4,17 @@
         <mat-card-header>
             <mat-card-title>Dashboard</mat-card-title>
         </mat-card-header>
-        <h1>Hello {{admin.username}}</h1>
+        <h1>Welcome {{admin.username}}!</h1>
         <form class="example-form">
             <mat-card-content>
                 <button mat-raised-button color="primary" routerLink="new-rental">New Rental</button>
                 <button mat-raised-button color="primary" routerLink="all-books">All Books</button>
-                <button mat-raised-button color="primary" routerLink="all-rentals">All Rentals</button>
-                <button mat-raised-button color="primary" routerLink="all-users">All Users</button>
+                <button mat-raised-button color="primary" routerLink="all-rentals">Rentals</button>
+                <button mat-raised-button color="primary" routerLink="all-users">Users</button>
                 
             </mat-card-content>
-            <p><strong>Number of library users: </strong> {{ allUsers }}</p>
-            <p><strong>Number of rented books: </strong>{{ rentedBooks }}</p>
+            <h3><strong>Number of library users: </strong> {{ allUsers }}</h3>
+            <h3><strong>Number of rented books: </strong>{{ rentedBooks }}/{{ allBooks }}</h3>
         </form>
     </mat-card>
 </div>
