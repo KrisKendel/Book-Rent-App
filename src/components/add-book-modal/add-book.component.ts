@@ -42,7 +42,7 @@ export class AddBookComponent implements OnInit {
   }
   public async onCreateBook(): Promise<void> {
      this.newBook = this.addCreateForm.value;
-     await this.http.post(this.url, this.newBook).toPromise();
+     this.bookService.createBook(this.newBook);
   }
 
   closeDialog(): void {
