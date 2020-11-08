@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Book } from 'src/models/book';
-import { HttpClient } from '@angular/common/http';
 import { BookService } from 'src/services/book-service/book.service';
 
 @Component({
@@ -15,20 +14,17 @@ export class AllRentalsComponent implements OnInit {
   public displayedColumns: string[] = ['id', 'authors', 'title', 'rented-to-date', 'user'];
   public allBooks: any;
   public rentedBooks: Book[] = [];
-  public url: string;
 
   constructor(
-    private http: HttpClient,
     private bookService: BookService
   ) { }
 
   ngOnInit(): void {
-    this.url = this.bookService.url;
     this.getAllBooks();
   }
 
   private async getAllBooks(): Promise<void> {
-    this.allBooks = await this.http.get<Book>(this.url).toPromise()
+    this.bookService.getAllBooks()
       .then(data => {
         this.allBooks = data;
         for (const book of this.allBooks) {

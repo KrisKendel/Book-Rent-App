@@ -4,7 +4,6 @@ import { Book } from 'src/models/book';
 import { DeleteBookComponent } from '../../components/delete-book-modal/delete-book.component';
 import { EditBookComponent } from '../../components/edit-book-modal/edit-book.component';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
 import { BookService } from 'src/services/book-service/book.service';
 
 
@@ -15,26 +14,23 @@ import { BookService } from 'src/services/book-service/book.service';
 })
 export class BookEditComponent implements OnInit{
 
-  public book: any;
+  public book: Book;
   public bookID: number;
-  public url: string;
   public fechedBook: Book;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private http: HttpClient,
     private bookService: BookService
   ) { }
 
   ngOnInit(): void {
-    this.url = this.bookService.url;
     this.bookID = this.activatedRoute.snapshot.params.bookID;
     this.fetchBook(this.bookID);
   }
 
-  private async fetchBook(bookID: number): Promise<void> {
-    await this.http.get<Book>(`${this.url}/${bookID}`).toPromise()
+  private async fetchBook(bookID: number): Promise<any> {
+    this.bookService.getBook(bookID)
     .then((book: Book) => {
       this.fechedBook = book;
     }).catch(err => {

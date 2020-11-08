@@ -50,7 +50,7 @@ export class EditBookComponent implements OnInit {
   }
 
   private async fetchBook(bookID: number): Promise<void> {
-    await this.http.get<Book>(`${this.url}/${bookID}`).toPromise()
+    this.bookService.getBook(bookID)
       .then(book => {
         this.bookEdit = book;
         this.addEditForm = this.formBuilder.group({
@@ -67,7 +67,13 @@ export class EditBookComponent implements OnInit {
   }
 
   public async onEditBook(): Promise <void> {
-    this.bookService.editBook(this.bookIDValue, this.addEditForm.value);
+    this.bookService.editBook(this.bookIDValue, this.addEditForm.value)
+    .then((book: Book) => {
+      this.book = book;
+      this.router.navigateByUrl('/dashboard/all-books');
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
   closeDialog(): void {

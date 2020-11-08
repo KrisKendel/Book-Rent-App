@@ -1,7 +1,7 @@
 {
   "books": [
     {
-      "title": "Specification by Example",
+      "title": "Specification by Examples 12",
       "publishDate": "2020-10-05T22:00:00.000Z",
       "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/adzic.jpg",
       "shortDescription": "About Specifications",
@@ -144,8 +144,11 @@
       "thumbnailUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSQP6Jn3AwDLhEL3IE0v_nA_HhV6Je3-2Yr7g&usqp=CAU",
       "shortDescription": "Intro to programming with JS",
       "authors": "Marijn Haverbeke",
-      "availability": true,
-      "id": 22
+      "availability": false,
+      "id": 22,
+      "userID": 50,
+      "rentedFrom": "2020-10-31T23:00:00.000Z",
+      "rentedTo": "2020-11-29T23:00:00.000Z"
     }
   ],
   "login": [
@@ -168,13 +171,13 @@
   "users": [
     {
       "id": 47,
-      "firstName": "Roger",
+      "firstName": "Rogers",
       "lastName": "Johnson",
       "dateCreate": "2018-01-20T23:00:00.000Z"
     },
     {
       "id": 33,
-      "firstName": "Marko",
+      "firstName": "Markos",
       "lastName": "Markic",
       "dateCreate": "2017-01-20T23:00:00.000Z"
     },

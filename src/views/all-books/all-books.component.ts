@@ -3,7 +3,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AddBookComponent } from '../../components/add-book-modal/add-book.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Book } from 'src/models/book';
-import { HttpClient } from '@angular/common/http';
 import { BookService } from 'src/services/book-service/book.service';
 
 @Component({
@@ -13,29 +12,25 @@ import { BookService } from 'src/services/book-service/book.service';
 })
 export class AllBooksComponent implements OnInit {
 
-  public books: any = {};
+  public books: Book[];
   public book: Book;
   public displayedColumns: string[] = ['authors', 'title', 'cover', 'availability'];
   public dataSource: any = [];
   public bookEdit: any;
-  public data: any;
-  public url: string;
 
   constructor(
-      private dialog: MatDialog,
-      private http: HttpClient,
-      private bookService: BookService
+    private dialog: MatDialog,
+    private bookService: BookService
   ) { }
 
   ngOnInit(): void {
-    this.url = this.bookService.url;
-    this.getAllBooks();
+    this.getBooks();
   }
 
-  private async getAllBooks(): Promise<void> {
-    this.books = await this.http.get(`${this.url}`).toPromise()
-      .then(data => {
-        this.books = data;
+  public async getBooks(): Promise<void> {
+    this.bookService.getAllBooks()
+      .then((books) => {
+        this.books = books;
         this.dataSource = new MatTableDataSource(this.books);
       }).catch(err => {
         console.log(err);

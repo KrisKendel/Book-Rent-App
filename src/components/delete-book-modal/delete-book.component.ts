@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { BookService } from '../../services/book-service/book.service';
 import { Book } from 'src/models/book';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-delete-book',
@@ -17,7 +18,8 @@ export class DeleteBookComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public bookID: object,
     private dialog: MatDialog,
-    private bookService: BookService
+    private bookService: BookService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -30,7 +32,11 @@ export class DeleteBookComponent implements OnInit {
   }
 
   async onDeleteBook(): Promise<void> {
-    this.bookService.deleteBook(this.bookIDValue);
+    this.bookService.deleteBook(this.bookIDValue)
+    .then(() => {
+      this.router.navigateByUrl('/dashboard/all-books');
+    })
+    .catch(err => console.log(err));
   }
 
   closeDialog(): void {

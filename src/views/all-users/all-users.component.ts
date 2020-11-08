@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateUserComponent } from 'src/components/create-user-modal/create-user.component';
+import { UserService } from 'src/services/user/user.service';
+import { User } from 'src/models/user';
 
 @Component({
   selector: 'app-all-users',
@@ -11,23 +12,23 @@ import { CreateUserComponent } from 'src/components/create-user-modal/create-use
 })
 export class AllUsersComponent implements OnInit {
   public usersUrl = 'http://localhost:3000/users';
-  public users: any;
+  public users: User[];
   public displayedColumns: string[] = ['firstName', 'lastName', 'dateCreate', 'deleteUser'];
   public dataSource: any = [];
   public userID: number;
 
   constructor(
-    private http: HttpClient,
     private dialog: MatDialog,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
-    this.getAllUsers();
+    this.getUsers();
   }
 
-  public async getAllUsers(): Promise<void> {
-    await this.http.get(`${this.usersUrl}`).toPromise()
-      .then((users) => {
+  public async getUsers(): Promise<void> {
+    this.userService.getAllUsers()
+    .then((users) => {
         this.users = users;
         this.dataSource = new MatTableDataSource(this.users);
       })

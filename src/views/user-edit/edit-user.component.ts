@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/user';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteUserComponent } from '../../components/delete-user-modal/delete-user.component';
 import { EditUserModalComponent } from '../../components/edit-user-modal/edit-user.component';
+import { UserService } from 'src/services/user/user.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -17,9 +17,9 @@ export class EditUserComponent implements OnInit {
   public fetchedUser: User;
 
   constructor(
-    private http: HttpClient,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class EditUserComponent implements OnInit {
   }
 
   private async fetchUser(userID: number): Promise<void> {
-    await this.http.get<User>(`${this.usersUrl}/${userID}`).toPromise()
+    this.userService.getUser(userID)
     .then((user: User) => {
       this.fetchedUser = user;
     }).catch(err => {

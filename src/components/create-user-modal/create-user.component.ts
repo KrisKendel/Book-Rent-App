@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/models/user';
-import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
+import { UserService } from 'src/services/user/user.service';
 
 @Component({
   selector: 'app-create-user',
@@ -10,7 +10,6 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent implements OnInit {
-  public usersUrl = 'http://localhost:3000/users';
   public addCreateForm: FormGroup;
   public firstName: string;
   public lastName: string;
@@ -19,8 +18,8 @@ export class CreateUserComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +32,7 @@ export class CreateUserComponent implements OnInit {
 
   public async onCreateUser(): Promise<void> {
     this.newUser = this.addCreateForm.value;
-    await this.http.post(this.usersUrl, this.newUser).toPromise();
+    this.userService.createUser(this.newUser);
  }
 
  closeDialog(): void {

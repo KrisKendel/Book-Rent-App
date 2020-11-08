@@ -2,8 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user';
+import { UserService } from 'src/services/user/user.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -26,7 +26,7 @@ export class EditUserModalComponent implements OnInit {
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private router: Router,
-    private http: HttpClient,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -40,11 +40,10 @@ export class EditUserModalComponent implements OnInit {
     }
   }
 
-  private async fetchUser(userID: number): Promise<void> {
-    this.userFetch = await this.http.get<User>(`${this.usersUrl}/${userID}`).toPromise()
+  private async fetchUser(userID: number): Promise<any> {
+   this.userService.getUser(userID)
      .then(user => {
        this.userEdit = user;
-
        this.addEditForm = this.formBuilder.group({
          firstName: [this.userEdit.firstName, [Validators.required]],
          lastName: [this.userEdit.lastName, [Validators.required]],
@@ -55,9 +54,8 @@ export class EditUserModalComponent implements OnInit {
       });
   }
 
-  public async onEditUser(): Promise <void> {
-    await this.http.patch<User>(`${this.usersUrl}/${this.userID}`, this.addEditForm.value)
-     .toPromise()
+  public async onEditUser(): Promise <any> {
+    this.userService.editUser(this.userID, this.addEditForm.value)
      .then((user: User) => {
        this.userEdited = user;
        this.router.navigateByUrl('/dashboard/all-users');
