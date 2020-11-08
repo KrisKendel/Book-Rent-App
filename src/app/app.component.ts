@@ -14,7 +14,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'books-app';
-  public loginUrl = 'http://localhost:3000/login';
   public userID: number;
 
   constructor(

@@ -43,7 +43,6 @@ export class EditBookComponent implements OnInit {
         this.bookIDValue = this.bookID[id];
         if (this.bookIDValue) {
           this.bookFetch = this.fetchBook(this.bookIDValue);
-          console.log(this.bookFetch);
         }
       }
     }
