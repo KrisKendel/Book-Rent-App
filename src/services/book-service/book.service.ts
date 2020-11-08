@@ -1,19 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Book } from 'src/models/book';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  public book: Book;
+  public url = 'http://localhost:3000/books';
 
   constructor(
     private http: HttpClient,
   ) { }
-
-  url = 'http://localhost:3000/books';
 
   async getAllBooks(): Promise<any> {
     return this.http.get<Book[]>(`${this.url}`).toPromise();
