@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Run JSON server before ng serve 
 
-In /src/assets/server/ folder run command json-server --watch db.json
+In /src/assets/ folder run command json-server --watch db.json
 
 ## Development server
 
