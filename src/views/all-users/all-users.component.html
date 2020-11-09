@@ -5,7 +5,7 @@
             <mat-card-title>All Users</mat-card-title>
         </mat-card-header>
         <button mat-raised-button  (click)="openCreateModal()" class="navi-buttons" color="primary">Create New User</button>
-        <button mat-raised-button routerLink="/dashboard" class="navi-buttons">Back to Dashboard</button>
+        <button mat-raised-button routerLink="/dashboard" class="navi-buttons" color="accent">Back to Dashboard</button>
         <table mat-table id="users" [dataSource]="dataSource">
             <div class="user-container">
                 <ng-container matColumnDef="firstName">

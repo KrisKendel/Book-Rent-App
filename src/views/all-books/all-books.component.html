@@ -10,7 +10,7 @@
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
         </mat-form-field>
           <button mat-raised-button  (click)="openModal()" class="navi-buttons" color="primary">Create New Book</button>
-          <button mat-raised-button routerLink="/dashboard" class="navi-buttons">Back to Dashboard</button>
+          <button mat-raised-button routerLink="/dashboard" class="navi-buttons" color="accent">Back to Dashboard</button>
         <table mat-table id="books" [dataSource]="dataSource">
             <div class="book-container">
                 <ng-container matColumnDef="authors">

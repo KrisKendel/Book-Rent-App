@@ -8,7 +8,7 @@
             <mat-label>Search Rented Books</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
         </mat-form-field>
-        <button mat-raised-button routerLink="/dashboard" class="back-to-dashboard">Back to Dashboard</button>
+        <button mat-raised-button routerLink="/dashboard" class="back-to-dashboard" color="accent">Back to Dashboard</button>
         <table mat-table id="books" [dataSource]="dataSource">
             <div class="all-rentals-container">
                 <ng-container matColumnDef="id">
