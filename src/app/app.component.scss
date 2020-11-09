@@ -1,17 +1,36 @@
 @import './../styles.scss';
 
+.mat-toolbar {
+    background: transparent;
+}
+
 .spacer {
     flex: 1 1 auto;
+}
+
+.mat-menu-trigger {
+    color: black;
+    background: $color-gray;
+    border-radius: 3px;
+  
+}
+
+.mat-menu-content {
+    background:lightgrey;
 }
 
 #name {
     cursor: pointer;
     outline: none;
+    color: $color-white;
 }
 
 .logo {
     margin-left: 5px;
     margin-right: 10px;
+    background: $color-gray;
+    border-radius: 3px;
+    padding: 3px;
 }
 
 h1 {

@@ -23,7 +23,6 @@ export class DeleteBookComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.url = this.bookService.url;
     for (const id in this.bookID){
       if (this.bookID.hasOwnProperty(id)){
         this.bookIDValue = this.bookID[id];

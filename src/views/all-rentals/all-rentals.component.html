@@ -17,12 +17,6 @@
                         <h3 class="id"><strong>{{ rented.id }}.</strong></h3>
                     </td>
                 </ng-container>
-                <ng-container matColumnDef="authors">
-                    <th mat-header-cell *matHeaderCellDef> Authors </th>
-                    <td mat-cell class="book-title" *matCellDef="let rented">
-                        <h3>{{ rented.authors }} </h3>
-                    </td>
-                </ng-container>
                 <ng-container matColumnDef="title">
                     <th mat-header-cell *matHeaderCellDef> Title </th>
                     <td mat-cell class="book-title" *matCellDef="let rented">
@@ -39,6 +33,14 @@
                     <th mat-header-cell *matHeaderCellDef> User ID </th>
                     <td mat-cell class="user" *matCellDef="let rented">
                         <h3>{{ rented.userID }} </h3>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="returned-earlier">
+                    <th mat-header-cell *matHeaderCellDef> Return </th>
+                    <td mat-cell class="book-title" *matCellDef="let rented">
+                        <button mat-mini-fab color="primary" (click)="openReturnedBookModal()">
+                            <mat-icon>restore</mat-icon>
+                        </button>
                     </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -149,15 +149,6 @@
       "userID": 50,
       "rentedFrom": "2020-10-31T23:00:00.000Z",
       "rentedTo": "2020-11-29T23:00:00.000Z"
-    },
-    {
-      "title": "asdasdds",
-      "publishDate": null,
-      "thumbnailUrl": "asdasd",
-      "shortDescription": "sadasd",
-      "authors": "asasdd",
-      "availability": true,
-      "id": 23
     }
   ],
   "login": [

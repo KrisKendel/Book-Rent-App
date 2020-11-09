@@ -70,7 +70,6 @@ export class NewRentalComponent implements OnInit {
     this.bookService.editBook(this.addRentalForm.value.id , this.addRentalForm.value)
     .then((book: Book) => {
          this.book = book;
-         console.log(this.book);
        })
        .catch(err => {
          console.log(err);

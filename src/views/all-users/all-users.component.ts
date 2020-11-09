@@ -11,7 +11,6 @@ import { User } from 'src/models/user';
   styleUrls: ['./all-users.component.scss']
 })
 export class AllUsersComponent implements OnInit {
-  public usersUrl = 'http://localhost:3000/users';
   public users: User[];
   public displayedColumns: string[] = ['firstName', 'lastName', 'dateCreate', 'deleteUser'];
   public dataSource: any = [];
