@@ -16,7 +16,7 @@ export class AddBookComponent implements OnInit {
   public authors: Array<string>;
   public shortDescription: string;
   public publishDate: string;
-  public availability = true;
+  public availability: boolean;
   public newBook: Book;
   public thumbnailUrl: string;
   public rentedFrom: string;
@@ -37,7 +37,10 @@ export class AddBookComponent implements OnInit {
       thumbnailUrl: [this.thumbnailUrl, [Validators.required]],
       shortDescription: [this.shortDescription],
       authors: [this.authors, [Validators.required]],
-      availability: [this.availability]
+      availability: [true],
+      userID: [null],
+      rentedFrom: [''],
+      rentedTo: ['']
     });
   }
   public async onCreateBook(): Promise<void> {

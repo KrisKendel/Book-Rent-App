@@ -12,11 +12,11 @@
     color: black;
     background: $color-gray;
     border-radius: 3px;
-  
+    opacity: 0.8;
 }
 
 .mat-menu-content {
-    background:lightgrey;
+    background:$color-gray;
 }
 
 #name {
@@ -31,6 +31,7 @@
     background: $color-gray;
     border-radius: 3px;
     padding: 3px;
+    opacity: 0.8;
 }
 
 h1 {

@@ -1,8 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BookService } from '../../services/book-service/book.service';
 import { Book } from 'src/models/book';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({

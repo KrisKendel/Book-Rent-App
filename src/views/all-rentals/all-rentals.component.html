@@ -2,7 +2,7 @@
 
     <mat-card class="box">
         <mat-card-header>
-            <mat-card-title>All Rentals</mat-card-title>
+            <mat-card-title>Rented Books</mat-card-title>
         </mat-card-header>
         <mat-form-field>
             <mat-label>Search Rented Books</mat-label>
@@ -38,8 +38,8 @@
                 <ng-container matColumnDef="returned-earlier">
                     <th mat-header-cell *matHeaderCellDef> Return </th>
                     <td mat-cell class="book-title" *matCellDef="let rented">
-                        <button mat-mini-fab color="primary" (click)="openReturnedBookModal()">
-                            <mat-icon>restore</mat-icon>
+                        <button mat-mini-fab color="primary" (click)="openReturnedBookModal(rented)">
+                        <mat-icon>restore</mat-icon>
                         </button>
                     </td>
                 </ng-container>

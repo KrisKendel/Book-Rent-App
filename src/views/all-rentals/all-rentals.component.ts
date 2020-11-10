@@ -47,8 +47,7 @@ export class AllRentalsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openReturnedBookModal(): void {
-     console.log('rentana knjige', this.rented.id);
-    // this.dialog.open(ReturnedBookComponent, { width: '640px', disableClose: true });
+  openReturnedBookModal(rented: any): void {
+     this.dialog.open(ReturnedBookComponent, { width: '640px', disableClose: true, data: { rented }});
   }
 }

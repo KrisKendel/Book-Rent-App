@@ -10,20 +10,16 @@
                       <mat-option *ngFor="let user of users" [value]="user.id">{{ user.firstName + ' ' + user.lastName }}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field class="example-full-width">
-                    <input type="text" 
-                           placeholder="Book Title"
-                           matInput 
-                           required
-                           formControlName="id" 
-                           [formControl]="myControl"
-                           [matAutocomplete]="auto">
-                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                    <mat-option *ngFor="let book of  availableBooks" [value]="book.id" >
+                <mat-form-field >
+                    <mat-select placeholder="Book Title" formControlName="id" required>
+                      <mat-option>---</mat-option>
+                      <mat-option *ngFor="let book of books" [value]="book.id">
                         {{ book.title }}
-                    </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+               
                 <mat-form-field class="date-picker" appearance="fill">
                     <mat-label>Rent from date</mat-label>
                     <input matInput formControlName="rentedFrom" [matDatepicker]="picker1" required>

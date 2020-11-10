@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { BookService } from 'src/services/book-service/book.service';
 import { Book } from 'src/models/book';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -34,7 +33,6 @@ export class EditBookComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private bookService: BookService,
-    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
