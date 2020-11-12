@@ -54,7 +54,7 @@ export class EditUserModalComponent implements OnInit {
       });
   }
 
-  public async onEditUser(): Promise <any> {
+  public async onEditUser(): Promise <void> {
     this.userService.editUser(this.userID, this.addEditForm.value)
      .then((user: User) => {
        this.userEdited = user;

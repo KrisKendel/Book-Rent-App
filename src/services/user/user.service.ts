@@ -8,11 +8,11 @@ export class UserService {
 
     constructor(private http: HttpClient) { }
 
-    async getAllUsers(): Promise<any> {
+    async getAllUsers(): Promise<User[]> {
         return this.http.get<User[]>(`${this.usersUrl}`).toPromise();
     }
 
-    async getUser(userID: number): Promise<any> {
+    async getUser(userID: number): Promise<User> {
         return this.http.get<User>(`${this.usersUrl}/${userID}`).toPromise();
     }
 

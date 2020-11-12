@@ -12,11 +12,11 @@ export class BookService {
     private http: HttpClient,
   ) { }
 
-  async getAllBooks(): Promise<any> {
+  async getAllBooks(): Promise<Book[]> {
     return this.http.get<Book[]>(`${this.url}`).toPromise();
   }
 
-   async getBook(bookID: number): Promise<any> {
+   async getBook(bookID: number): Promise<Book> {
      return this.http.get<Book>(`${this.url}/${bookID}`).toPromise();
    }
 

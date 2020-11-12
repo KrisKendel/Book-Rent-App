@@ -1,10 +1,9 @@
 # BooksApp
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.6.
 
 ## Run JSON server before ng serve 
 
-In /src/assets/ folder run command json-server --watch db.json
+In /src/assets/ folder run command npx json-server --watch db.json
 
 ## Development server
 

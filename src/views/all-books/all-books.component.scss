@@ -18,9 +18,9 @@ table {
     cursor: pointer;
     text-align: center;
     &:hover {
-        background-color: grey;
+        //background-color: grey;
         opacity: 0.8;
-        color: white;
+        color: $color-material-primary;
         border-radius: 20px;
     }
 }
