@@ -8,9 +8,9 @@
       "authors": "Gojko Adzic",
       "availability": false,
       "id": 2,
-      "userID": 47,
-      "rentedFrom": "2020-09-30T22:00:00.000Z",
-      "rentedTo": "2020-10-29T23:00:00.000Z"
+      "userID": 49,
+      "rentedFrom": "2020-12-09T23:00:00.000Z",
+      "rentedTo": "2020-12-25T23:00:00.000Z"
     },
     {
       "title": "Flex 4 in Action",
@@ -30,10 +30,10 @@
       "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/alag.jpg",
       "shortDescription": "CI in action",
       "authors": "Satnam Alag",
-      "availability": true,
-      "rentedFrom": "",
-      "rentedTo": "",
-      "userID": null,
+      "availability": false,
+      "rentedFrom": "2020-12-04T23:00:00.000Z",
+      "rentedTo": "2020-12-23T23:00:00.000Z",
+      "userID": 33,
       "id": 5
     },
     {
@@ -66,11 +66,11 @@
       "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/almiray.jpg",
       "shortDescription": "Griffon in Action is a comprehensive tutorial written for Java developers who want a more productive approach to UI development. In this book, you'll immediately dive into Griffon. After a Griffon orientation and a quick Groovy tutorial, you'll start building examples that explore Griffon's high productivity approach to Swing development. One of the troublesome parts of Swing development is the amount of Java code that is required to get a simple application off the ground.",
       "authors": "Andres Almiray, Danno Ferrin, James Shingler",
-      "availability": false,
+      "availability": true,
       "id": 8,
-      "userID": 47,
-      "rentedFrom": "2020-10-15T22:00:00.000Z",
-      "rentedTo": "2020-10-29T23:00:00.000Z"
+      "userID": null,
+      "rentedFrom": "",
+      "rentedTo": ""
     },
     {
       "title": "OSGi in Depth",
@@ -150,11 +150,11 @@
       "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/banker.jpg",
       "shortDescription": "MongoDB In Action is a comprehensive guide to MongoDB for application developers. The book begins by explaining what makes MongoDB unique and describing its ideal use cases. A series of tutorials designed for MongoDB mastery then leads into detailed examples for leveraging MongoDB in e-commerce, social networking, analytics, and other common applications.",
       "authors": "Kyle Banker",
-      "availability": false,
+      "availability": true,
       "id": 15,
-      "userID": 33,
-      "rentedFrom": "2020-11-06T23:00:00.000Z",
-      "rentedTo": "2039-01-01T23:00:00.000Z"
+      "userID": null,
+      "rentedFrom": "",
+      "rentedTo": ""
     },
     {
       "title": "Taming Jaguar",
@@ -172,7 +172,7 @@
       "title": "Eloquent JavaScript",
       "publishDate": "2019-06-11T22:00:00.000Z",
       "thumbnailUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSQP6Jn3AwDLhEL3IE0v_nA_HhV6Je3-2Yr7g&usqp=CAU",
-      "shortDescription": "Intro to programming with JS",
+      "shortDescription": "JS\n",
       "authors": "Marijn Haverbeke",
       "availability": true,
       "id": 22,
@@ -196,13 +196,18 @@
       "username": "Kristijan",
       "password": "54321",
       "id": 4
+    },
+    {
+      "username": "anci",
+      "password": "12345",
+      "id": 5
     }
   ],
   "users": [
     {
       "id": 47,
-      "firstName": "Rogers",
-      "lastName": "Johnson",
+      "firstName": "Rogera",
+      "lastName": "Johnsons",
       "dateCreate": "2018-01-20T23:00:00.000Z"
     },
     {
@@ -222,12 +227,6 @@
       "lastName": "Johnson",
       "dateCreate": "2020-10-12T22:00:00.000Z",
       "id": 49
-    },
-    {
-      "firstName": "Miljenkoe",
-      "lastName": "asdsads",
-      "dateCreate": "2020-10-15T22:00:00.000Z",
-      "id": 50
     }
   ]
 }

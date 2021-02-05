@@ -26,7 +26,8 @@ export class DeleteUserComponent implements OnInit {
     }
   }
 
-  public async onDeleteUser(): Promise<void> {
+  public async onDeleteUser(event): Promise<void> {
+    event.stopPropagation();
     this.userService.deleteUser(this.userIDValue)
       .then(() => this.router.navigateByUrl('/dashboard/all-users'))
       .catch(err => console.log(err));

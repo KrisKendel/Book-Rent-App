@@ -24,7 +24,7 @@ export class UserService {
         await this.http.delete(`${this.usersUrl}/${userID}`).toPromise();
     }
 
-    async editUser(userID: number, editFormValue): Promise<any> {
-        await this.http.patch<User>(`${this.usersUrl}/${userID}`, editFormValue).toPromise();
+    async editUser(userID: number, editFormValue): Promise<User> {
+        return this.http.patch<User>(`${this.usersUrl}/${userID}`, editFormValue).toPromise();
     }
 }

@@ -34,7 +34,8 @@ export class ReturnedBookComponent implements OnInit {
     });
   }
 
-  async onConfirmBookReturned(): Promise<void> {
+  async onConfirmBookReturned(event): Promise<void> {
+    event.stopPropagation();
     this.bookService.editBook(this.rentedBook.id, this.returnedForm.value);
   }
 

@@ -28,8 +28,8 @@ export class BookService {
     await this.http.delete(`${this.url}/${bookID}`).toPromise();
   }
 
-  async editBook(bookID: number, body: object): Promise<any> {
-    await this.http.patch<Book>(`${this.url}/${bookID}`, body).toPromise();
+  async editBook(bookID: number, body: object): Promise<Book> {
+    return this.http.patch<Book>(`${this.url}/${bookID}`, body).toPromise();
   }
 
 }

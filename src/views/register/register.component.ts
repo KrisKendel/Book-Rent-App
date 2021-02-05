@@ -23,8 +23,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    this.auth.register(this.username, this.password).then(res => {
-      // this.storage.set('user', res);
+    this.auth.register(this.username, this.password).then(() => {
       this.router.navigate(['']);
     });
   }
