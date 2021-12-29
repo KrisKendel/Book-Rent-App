@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./delete-book.component.scss']
 })
 export class DeleteBookComponent implements OnInit {
-  public book: Book;
-  public bookIDValue: number;
-  public url: string;
+  book: Book;
+  bookIDValue: number;
+  url: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public bookID: object,
@@ -22,19 +22,18 @@ export class DeleteBookComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    for (const id in this.bookID){
-      if (this.bookID.hasOwnProperty(id)){
+    for (const id in this.bookID) {
+      if (this.bookID.hasOwnProperty(id)) {
         this.bookIDValue = this.bookID[id];
       }
     }
   }
 
-  async onDeleteBook(): Promise<void> {
+  onDeleteBook(): void {
     this.bookService.deleteBook(this.bookIDValue)
-    .then(() => {
-      this.router.navigateByUrl('/dashboard/all-books');
-    })
-    .catch(err => console.log(err));
+      .subscribe(() => {
+        this.router.navigateByUrl('/dashboard/all-books');
+      });
   }
 
   closeDialog(): void {

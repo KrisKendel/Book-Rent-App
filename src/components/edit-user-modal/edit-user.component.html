@@ -1,42 +1,44 @@
 <div>
-    <div class="add-title">
-      <h2 class="primary">Edit User</h2>
-    </div>
-    <div>
-      <form [formGroup]="addEditForm" *ngIf="addEditForm">
-          <div class="text-inside">
-            <mat-form-field>
-              <input matInput placeholder="First Name" value={{firstName}} formControlName="firstName" maxlength="200" required>
-              <mat-error *ngIf="addEditForm.controls.firstName.hasError('required')">
-                Please enter First Name
-              </mat-error>
-              <mat-error *ngIf="addEditForm.controls.firstName.hasError('pattern')">
-                Please enter valid first name
-              </mat-error>
-            </mat-form-field>
-          </div>
-        
-          <div class="text-inside">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Last Name" value={{lastName}} formControlName="lastName" required>
-              <mat-error *ngIf="addEditForm.controls.lastName.hasError('required')">
-                Please enter Last Name
-              </mat-error>
-            </mat-form-field>
-          </div>
-        <mat-form-field class="date-picker" appearance="fill">
-          <mat-label>Account create date</mat-label>
-          <input matInput formControlName="dateCreate" [matDatepicker]="picker">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-       
-        <div class="btn-sec">
-          <button mat-raised-button type="submit" color="primary" [disabled]="!addEditForm.valid" class="Update-btn"
-            (click)="onEditUser()">Update</button>
-          <button mat-raised-button type="button" color="accent" class="Cancel-btn" (click)="closeDialog()">Cancel</button>
-        </div>
-  
-      </form>
-    </div>
+  <div class="add-title">
+    <h2 class="primary">Edit User</h2>
   </div>
+  <div>
+    <form [formGroup]="addEditForm" *ngIf="addEditForm">
+      <div class="text-inside">
+        <mat-form-field>
+          <input matInput placeholder="First Name" value={{firstName}} formControlName="firstName" maxlength="200"
+            required>
+          <mat-error *ngIf="addEditForm.controls.firstName.hasError('required')">
+            Please enter First Name
+          </mat-error>
+          <mat-error *ngIf="addEditForm.controls.firstName.hasError('pattern')">
+            Please enter valid first name
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="text-inside">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Last Name" value={{lastName}} formControlName="lastName" required>
+          <mat-error *ngIf="addEditForm.controls.lastName.hasError('required')">
+            Please enter Last Name
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <mat-form-field class="date-picker" appearance="fill">
+        <mat-label>Account create date</mat-label>
+        <input matInput formControlName="dateCreate" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div class="btn-sec">
+        <button mat-raised-button type="submit" color="primary" [disabled]="!addEditForm.valid" class="Update-btn"
+          (click)="onEditUser($event)">Update</button>
+        <button mat-raised-button type="button" color="accent" class="Cancel-btn"
+          (click)="closeDialog()">Cancel</button>
+      </div>
+
+    </form>
+  </div>
+</div>

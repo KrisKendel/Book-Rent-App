@@ -12,9 +12,10 @@ import { UserService } from 'src/services/user/user.service';
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-  public usersUrl = 'http://localhost:3000/users';
-  public userID: number;
-  public fetchedUser: User;
+  usersUrl = 'http://localhost:3000/users';
+  userID: number;
+  fetchedUser: User;
+  error: Error;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,19 +30,20 @@ export class EditUserComponent implements OnInit {
 
   private async fetchUser(userID: number): Promise<void> {
     this.userService.getUser(userID)
-    .then((user: User) => {
-      this.fetchedUser = user;
-    }).catch(err => {
-      console.log(err);
-    });
+      .subscribe((user: User) => {
+        this.fetchedUser = user;
+      },
+        (error) => {
+          this.error = error;
+        });
   }
 
   openEditModal(): void {
-    this.dialog.open(EditUserModalComponent, {width: '640px', disableClose: true, data: { userID: this.userID }});
+    this.dialog.open(EditUserModalComponent, { width: '640px', disableClose: true, data: { userID: this.userID } });
   }
 
   openDeleteModal(): void {
-    this.dialog.open(DeleteUserComponent, {width: '640px', disableClose: true,  data: { userID: this.userID }});
+    this.dialog.open(DeleteUserComponent, { width: '640px', disableClose: true, data: { userID: this.userID } });
   }
 
 }

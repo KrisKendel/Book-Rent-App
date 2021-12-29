@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { AuthService } from 'src/services/authentication/authentication.service';
 
 @Component({
@@ -10,11 +9,10 @@ import { AuthService } from 'src/services/authentication/authentication.service'
   providers: [AuthService]
 })
 export class RegisterComponent implements OnInit {
-  public username: string;
-  public password: string;
+  username: string;
+  password: string;
 
   constructor(
-    @Inject(LOCAL_STORAGE) private storage: StorageService,
     private auth: AuthService,
     private router: Router
   ) { }

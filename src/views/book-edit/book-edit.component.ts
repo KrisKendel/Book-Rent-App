@@ -5,6 +5,7 @@ import { DeleteBookComponent } from '../../components/delete-book-modal/delete-b
 import { EditBookComponent } from '../../components/edit-book-modal/edit-book.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BookService } from 'src/services/book-service/book.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -12,11 +13,13 @@ import { BookService } from 'src/services/book-service/book.service';
   templateUrl: './book-edit.component.html',
   styleUrls: ['./book-edit.component.scss']
 })
-export class BookEditComponent implements OnInit{
+export class BookEditComponent implements OnInit {
 
-  public book: Book;
-  public bookID: number;
-  public fechedBook: Book;
+  book: Book;
+  bookID: number;
+  fechedBook: Book;
+  error: Error;
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,20 +32,18 @@ export class BookEditComponent implements OnInit{
     this.fetchBook(this.bookID);
   }
 
-  private async fetchBook(bookID: number): Promise<any> {
+  fetchBook(bookID: number): void {
     this.bookService.getBook(bookID)
-    .then((book: Book) => {
-      this.fechedBook = book;
-    }).catch(err => {
-      console.log(err);
-    });
+      .subscribe((book: Book) => {
+        this.fechedBook = book;
+      }, (error) => { this.error = error });
   }
 
   openDeleteModal(): void {
-    this.dialog.open(DeleteBookComponent, {width: '640px', disableClose: true,  data: { bookID: this.bookID }});
+    this.dialog.open(DeleteBookComponent, { width: '640px', disableClose: true, data: { bookID: this.bookID } });
   }
 
   openEditModal(): void {
-    this.dialog.open(EditBookComponent, {width: '640px', disableClose: true, data: { bookID: this.bookID }});
+    this.dialog.open(EditBookComponent, { width: '640px', disableClose: true, data: { bookID: this.bookID } });
   }
 }

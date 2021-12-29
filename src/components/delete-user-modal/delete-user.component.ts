@@ -9,7 +9,8 @@ import { UserService } from 'src/services/user/user.service';
   styleUrls: ['./delete-user.component.scss']
 })
 export class DeleteUserComponent implements OnInit {
-  public userIDValue: number;
+  userIDValue: number;
+  error: Error;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public user: object,
@@ -19,19 +20,20 @@ export class DeleteUserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    for (const id in this.user){
+    for (const id in this.user) {
       if (this.user.hasOwnProperty(id)) {
         this.userIDValue = this.user[id];
       }
     }
   }
 
-  public async onDeleteUser(event): Promise<void> {
+  onDeleteUser(event): void {
     event.stopPropagation();
     this.userService.deleteUser(this.userIDValue)
-      .then(() => this.router.navigateByUrl('/dashboard/all-users'))
-      .catch(err => console.log(err));
- }
+      .subscribe(() => {
+        this.router.navigateByUrl('/dashboard/all-users');
+      }, (error) => this.error = error);
+  }
 
   closeDialog(): void {
     this.dialog.closeAll();

@@ -27,13 +27,14 @@ export class AllUsersComponent implements OnInit {
 
   public async getUsers(): Promise<void> {
     this.userService.getAllUsers()
-    .then((users) => {
+      .subscribe((users) => {
         this.users = users;
         this.dataSource = new MatTableDataSource(this.users);
-      })
-     .catch(err => {
-        console.log(err);
-     });
+      },
+        (err => {
+          console.log(err);
+        }));
+
   }
 
   openCreateModal(): void {

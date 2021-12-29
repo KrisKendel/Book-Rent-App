@@ -1,35 +1,38 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { books } from 'src/environments/rest';
 import { Book } from 'src/models/book';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  public url = 'http://localhost:3000/books';
+  url = `${environment.apiUrl}${books}`;
 
   constructor(
     private http: HttpClient,
   ) { }
 
-  async getAllBooks(): Promise<Book[]> {
-    return this.http.get<Book[]>(`${this.url}`).toPromise();
+  getAllBooks(): Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.url}`);
   }
 
-   async getBook(bookID: number): Promise<Book> {
-     return this.http.get<Book>(`${this.url}/${bookID}`).toPromise();
-   }
-
-  async createBook(newBook: Book): Promise<void> {
-    await this.http.post(`${this.url}`, newBook).toPromise();
+  getBook(bookID: number): Observable<Book> {
+    return this.http.get<Book>(`${this.url}/${bookID}`);
   }
 
-   async deleteBook(bookID: number): Promise<void>{
-    await this.http.delete(`${this.url}/${bookID}`).toPromise();
+  createBook(newBook: Book): Observable<any> {
+    return this.http.post(`${this.url}`, newBook);
   }
 
-  async editBook(bookID: number, body: object): Promise<Book> {
-    return this.http.patch<Book>(`${this.url}/${bookID}`, body).toPromise();
+  deleteBook(bookID: number): Observable<any> {
+    return this.http.delete(`${this.url}/${bookID}`);
+  }
+
+  editBook(bookID: number, body: object): Observable<Book> {
+    return this.http.patch<Book>(`${this.url}/${bookID}`, body);
   }
 
 }

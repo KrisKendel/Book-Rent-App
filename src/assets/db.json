@@ -179,6 +179,18 @@
       "userID": null,
       "rentedFrom": "",
       "rentedTo": ""
+    },
+    {
+      "title": "sadasd",
+      "publishDate": "2021-12-07T23:00:00.000Z",
+      "thumbnailUrl": "asds",
+      "shortDescription": "asdas",
+      "authors": "asdasdas",
+      "availability": true,
+      "userID": null,
+      "rentedFrom": "",
+      "rentedTo": "",
+      "id": 23
     }
   ],
   "login": [
@@ -207,7 +219,7 @@
     {
       "id": 47,
       "firstName": "Rogera",
-      "lastName": "Johnsons",
+      "lastName": "Johnsonsz8",
       "dateCreate": "2018-01-20T23:00:00.000Z"
     },
     {
@@ -227,6 +239,12 @@
       "lastName": "Johnson",
       "dateCreate": "2020-10-12T22:00:00.000Z",
       "id": 49
+    },
+    {
+      "firstName": "asdsd",
+      "lastName": "asdasdd",
+      "dateCreate": "2021-05-11T22:00:00.000Z",
+      "id": 50
     }
   ]
 }

@@ -1,15 +1,17 @@
 <mat-toolbar>
     <mat-toolbar-row>
         <img class="logo" src="./../assets//images/books-icon.png">
-        <span id="name" routerLink="dashboard"><h1>Book Rent</h1></span>
+        <span id="name" routerLink="dashboard">
+            <h1>Book Rent</h1>
+        </span>
         <span class="spacer"></span>
-        <button *ngIf="router.url !== '/' && router.url !== '/registration'" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
-        <mat-menu  id="menu "#menu="matMenu">
+        <button *ngIf="router.url !== '/' && router.url !== '/registration'" mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu id="menu " #menu="matMenu">
             <button mat-menu-item (click)="logout()" routerLink="/">Logout</button>
         </mat-menu>
     </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="route-container" [@routeAnimations]="prepareRoute(outlet)">
-    <router-outlet #outlet="outlet"></router-outlet>
-</div>
+<router-outlet></router-outlet>

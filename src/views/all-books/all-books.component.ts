@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { AddBookComponent } from '../../components/add-book-modal/add-book.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Book } from 'src/models/book';
 import { BookService } from 'src/services/book-service/book.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-all-books',
@@ -12,11 +12,8 @@ import { BookService } from 'src/services/book-service/book.service';
 })
 export class AllBooksComponent implements OnInit {
 
-  public books: Book[];
-  public book: Book;
-  public displayedColumns: string[] = ['authors', 'title', 'cover', 'availability'];
-  public dataSource: any = [];
-  public bookEdit: any;
+  displayedColumns: string[] = ['authors', 'title', 'cover', 'availability'];
+  books$: Observable<Book[]>;
 
   constructor(
     private dialog: MatDialog,
@@ -27,22 +24,17 @@ export class AllBooksComponent implements OnInit {
     this.getBooks();
   }
 
-  public async getBooks(): Promise<void> {
-    this.bookService.getAllBooks()
-      .then((books) => {
-        this.books = books;
-        this.dataSource = new MatTableDataSource(this.books);
-      }).catch(err => {
-        console.log(err);
-      });
+  getBooks(): void {
+    this.books$ = this.bookService.getAllBooks();
   }
 
-  applyFilter(event: Event): any {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+  // APPLY FILTER TO OBSERVABLE
+  // applyFilter(event: Event): any {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  // }
 
   openModal(): void {
-   this.dialog.open(AddBookComponent, { width: '640px', disableClose: true });
+    this.dialog.open(AddBookComponent, { width: '640px', disableClose: true });
   }
 }

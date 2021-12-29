@@ -29,17 +29,15 @@ export class AllRentalsComponent implements OnInit {
 
   private async getAllBooks(): Promise<void> {
     this.bookService.getAllBooks()
-      .then(data => {
+      .subscribe(data => {
         this.allBooks = data;
         for (const book of this.allBooks) {
           if (book.availability === false) {
-             this.rentedBooks.push(book);
+            this.rentedBooks.push(book);
           }
         }
         this.dataSource = new MatTableDataSource(this.rentedBooks);
-      }).catch(err => {
-        console.log(err);
-      });
+      })
   }
 
   applyFilter(event: Event): void {
@@ -48,6 +46,6 @@ export class AllRentalsComponent implements OnInit {
   }
 
   openReturnedBookModal(rented: any): void {
-     this.dialog.open(ReturnedBookComponent, { width: '640px', disableClose: true, data: { rented }});
+    this.dialog.open(ReturnedBookComponent, { width: '640px', disableClose: true, data: { rented } });
   }
 }

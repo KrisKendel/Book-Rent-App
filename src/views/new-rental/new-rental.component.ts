@@ -12,19 +12,19 @@ import { UserService } from 'src/services/user/user.service';
   styleUrls: ['./new-rental.component.scss']
 })
 export class NewRentalComponent implements OnInit {
-  public addRentalForm: FormGroup;
-  public title: string;
-  public id: number;
-  public dateFrom: string;
-  public dateTo: string;
-  public filteredOptions: Observable<object[]>;
-  public myControl = new FormControl();
-  public book: Book;
-  public books: Book[];
-  public availableBooks: any[] = [];
-  public users: User[];
-  public user: User;
-
+  addRentalForm: FormGroup;
+  title: string;
+  id: number;
+  dateFrom: string;
+  dateTo: string;
+  filteredOptions: Observable<object[]>;
+  myControl = new FormControl();
+  book: Book;
+  books: Book[];
+  availableBooks: any[] = [];
+  users: User[];
+  user: User;
+  error: Error;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,9 +33,9 @@ export class NewRentalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-   this.getAvailableBooks();
-   this.getAllUsers();
-   this.addRentalForm = this.formBuilder.group({
+    this.getAvailableBooks();
+    this.getAllUsers();
+    this.addRentalForm = this.formBuilder.group({
       userID: [this.user],
       id: [this.id],
       rentedFrom: [this.dateFrom],
@@ -44,9 +44,9 @@ export class NewRentalComponent implements OnInit {
     });
   }
 
-  public async getAvailableBooks(): Promise<void> {
+  getAvailableBooks(): void {
     this.bookService.getAllBooks()
-      .then((books) => {
+      .subscribe((books) => {
         this.books = books;
         for (const book of this.books) {
           if (book.availability === true) {
@@ -56,24 +56,21 @@ export class NewRentalComponent implements OnInit {
       });
   }
 
-  public async getAllUsers(): Promise<void> {
+  getAllUsers(): void {
     this.userService.getAllUsers()
-      .then((users) => {
+      .subscribe((users) => {
         this.users = users;
-      })
-     .catch(err => {
-        console.log(err);
-     });
+      },
+        (err => {
+          console.log(err);
+        }));
   }
 
-  public async onNewRental(): Promise<void> {
-    this.bookService.editBook(this.addRentalForm.value.id , this.addRentalForm.value)
-    .then((book: Book) => {
-         this.book = book;
-       })
-       .catch(err => {
-         console.log(err);
-       });
+  onNewRental(): void {
+    this.bookService.editBook(this.addRentalForm.value.id, this.addRentalForm.value)
+      .subscribe((book: Book) => {
+        this.book = book;
+      }, (error) => this.error = error);
   }
 }
 
