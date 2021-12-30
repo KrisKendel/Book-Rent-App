@@ -5,6 +5,7 @@ import { BookService } from '../../services/book-service/book.service';
 import { Book } from 'src/models/book';
 import { User } from '../../models/user';
 import { UserService } from 'src/services/user/user.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-rental',
@@ -17,14 +18,9 @@ export class NewRentalComponent implements OnInit {
   id: number;
   dateFrom: string;
   dateTo: string;
-  filteredOptions: Observable<object[]>;
-  myControl = new FormControl();
-  book: Book;
-  books: Book[];
-  availableBooks: any[] = [];
-  users: User[];
   user: User;
-  error: Error;
+  availableBooks$: Observable<Book[]>;
+  users$: Observable<User[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,6 +31,19 @@ export class NewRentalComponent implements OnInit {
   ngOnInit(): void {
     this.getAvailableBooks();
     this.getAllUsers();
+    this.createFrom();
+  }
+
+  getAvailableBooks(): void {
+    this.availableBooks$ = this.bookService.getAllBooks()
+      .pipe(map((el) => [...el].filter((book) => book.availability)));
+  }
+
+  getAllUsers(): void {
+    this.users$ = this.userService.getAllUsers();
+  }
+
+  createFrom(): void {
     this.addRentalForm = this.formBuilder.group({
       userID: [this.user],
       id: [this.id],
@@ -44,33 +53,8 @@ export class NewRentalComponent implements OnInit {
     });
   }
 
-  getAvailableBooks(): void {
-    this.bookService.getAllBooks()
-      .subscribe((books) => {
-        this.books = books;
-        for (const book of this.books) {
-          if (book.availability === true) {
-            this.availableBooks.push(book);
-          }
-        }
-      });
-  }
-
-  getAllUsers(): void {
-    this.userService.getAllUsers()
-      .subscribe((users) => {
-        this.users = users;
-      },
-        (err => {
-          console.log(err);
-        }));
-  }
-
   onNewRental(): void {
-    this.bookService.editBook(this.addRentalForm.value.id, this.addRentalForm.value)
-      .subscribe((book: Book) => {
-        this.book = book;
-      }, (error) => this.error = error);
+    this.bookService.editBook(this.addRentalForm.value.id, this.addRentalForm.value).subscribe();
   }
 }
 

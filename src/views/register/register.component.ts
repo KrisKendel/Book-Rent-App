@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    this.auth.register(this.username, this.password).then(() => {
+    this.auth.register(btoa(this.username), btoa(this.password)).then(() => {
       this.router.navigate(['']);
     });
   }

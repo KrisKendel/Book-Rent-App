@@ -10,11 +10,11 @@ import { UserService } from 'src/services/user/user.service';
   styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent implements OnInit {
-  public addCreateForm: FormGroup;
-  public firstName: string;
-  public lastName: string;
-  public dateCreated: string;
-  public newUser: User;
+  addCreateForm: FormGroup;
+  firstName: string;
+  lastName: string;
+  dateCreated: string;
+  newUser: User;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,13 +30,13 @@ export class CreateUserComponent implements OnInit {
     });
   }
 
-  public async onCreateUser(): Promise<void> {
+  onCreateUser(): void {
     this.newUser = this.addCreateForm.value;
-    this.userService.createUser(this.newUser);
- }
+    this.userService.createUser(this.newUser).subscribe();
+  }
 
- closeDialog(): void {
-  this.dialog.closeAll();
-}
+  closeDialog(): void {
+    this.dialog.closeAll();
+  }
 
 }

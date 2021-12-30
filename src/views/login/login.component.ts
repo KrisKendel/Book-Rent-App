@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.auth.login().then(res => {
       for (const user of res) {
-        if (this.username === user.username && this.password === user.password) {
+        if (btoa(this.username) === user.username && btoa(this.password) === user.password) {
           this.isLoggined = true;
           this.isSubmitted = true;
           localStorage.setItem('user', JSON.stringify(user));

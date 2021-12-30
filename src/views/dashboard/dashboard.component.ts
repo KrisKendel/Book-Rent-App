@@ -3,6 +3,8 @@ import { Book } from 'src/models/book';
 import { BookService } from 'src/services/book-service/book.service';
 import { UserService } from 'src/services/user/user.service';
 import { User } from 'src/models/user';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,13 +12,9 @@ import { User } from 'src/models/user';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  rentedBooks = 0;
-  allBooks = 0;
-  books: Book[];
-  book: Book;
-  user: User;
-  users: User[];
-  allUsers = 0;
+  allBooks$: Observable<Book[]>;
+  rentedBooks$: Observable<Book[]>;
+  users$: Observable<User[]>;
   username: string;
   admin: any;
   loginUrl = 'http://localhost:3000/users';
@@ -28,33 +26,19 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.admin = JSON.parse(localStorage.getItem('user'));
+    this.username = atob(this.admin.username);
     this.getAllRentedBooks();
     this.getAllUsers();
   }
 
-  private async getAllRentedBooks(): Promise<void> {
-    this.bookService.getAllBooks()
-      .subscribe(data => {
-        this.books = data;
-        for (this.book of this.books) {
-          this.allBooks++;
-          if (this.book.availability === false) {
-            this.rentedBooks++;
-          }
-        }
-      });
+  getAllRentedBooks(): void {
+    this.rentedBooks$ = this.bookService.getAllBooks().pipe(
+      map((el) => [...el].filter((book) => !book.availability)),
+    );
+    this.allBooks$ = this.bookService.getAllBooks();
   }
 
-  private async getAllUsers(): Promise<void> {
-    this.userService.getAllUsers()
-      .subscribe((data) => {
-        this.users = data;
-        for (this.user of this.users) {
-          this.allUsers++;
-        }
-      },
-        (err => {
-          console.log(err);
-        }));
+  getAllUsers(): void {
+    this.users$ = this.userService.getAllUsers();
   }
 }

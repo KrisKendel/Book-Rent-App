@@ -4,12 +4,13 @@
         <mat-card-header>
             <mat-card-title>Rented Books</mat-card-title>
         </mat-card-header>
-        <mat-form-field>
+        <!-- <mat-form-field>
             <mat-label>Search Rented Books</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-        </mat-form-field>
-        <button mat-raised-button routerLink="/dashboard" class="back-to-dashboard" color="accent">Back to Dashboard</button>
-        <table mat-table id="books" [dataSource]="dataSource">
+        </mat-form-field> -->
+        <button mat-raised-button routerLink="/dashboard" class="back-to-dashboard" color="accent">Back to
+            Dashboard</button>
+        <table mat-table id="books" [dataSource]="rented$ | async">
             <div class="all-rentals-container">
                 <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -39,7 +40,7 @@
                     <th mat-header-cell *matHeaderCellDef> Return </th>
                     <td mat-cell class="book-title" *matCellDef="let rented">
                         <button mat-mini-fab color="primary" (click)="openReturnedBookModal(rented)">
-                        <mat-icon>restore</mat-icon>
+                            <mat-icon>restore</mat-icon>
                         </button>
                     </td>
                 </ng-container>

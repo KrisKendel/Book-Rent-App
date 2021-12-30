@@ -8,9 +8,9 @@
       "authors": "Gojko Adzic",
       "availability": false,
       "id": 2,
-      "userID": 49,
-      "rentedFrom": "2020-12-09T23:00:00.000Z",
-      "rentedTo": "2020-12-25T23:00:00.000Z"
+      "userID": 47,
+      "rentedFrom": "2021-12-01T23:00:00.000Z",
+      "rentedTo": "2021-12-30T23:00:00.000Z"
     },
     {
       "title": "Flex 4 in Action",
@@ -25,15 +25,10 @@
       "rentedTo": "2020-10-29T23:00:00.000Z"
     },
     {
-      "title": "Collective Intelligence in Action",
-      "publishDate": "2008-10-01T00:00:00.000Z",
-      "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/alag.jpg",
-      "shortDescription": "CI in action",
-      "authors": "Satnam Alag",
-      "availability": false,
-      "rentedFrom": "2020-12-04T23:00:00.000Z",
-      "rentedTo": "2020-12-23T23:00:00.000Z",
-      "userID": 33,
+      "availability": true,
+      "rentedFrom": "",
+      "rentedTo": "",
+      "userID": null,
       "id": 5
     },
     {
@@ -195,24 +190,14 @@
   ],
   "login": [
     {
-      "username": "riki",
-      "password": "1234",
-      "id": 2
+      "username": "dGVzdG5p",
+      "password": "MTIzNDU=",
+      "id": 6
     },
     {
-      "username": "mixy09",
-      "password": "12345",
-      "id": 3
-    },
-    {
-      "username": "Kristijan",
-      "password": "54321",
-      "id": 4
-    },
-    {
-      "username": "anci",
-      "password": "12345",
-      "id": 5
+      "username": "a2lraQ==",
+      "password": "MTIzNDU2",
+      "id": 7
     }
   ],
   "users": [

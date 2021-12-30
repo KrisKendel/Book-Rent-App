@@ -4,9 +4,10 @@
         <mat-card-header>
             <mat-card-title>All Users</mat-card-title>
         </mat-card-header>
-        <button mat-raised-button  (click)="openCreateModal()" class="navi-buttons" color="primary">Create New User</button>
+        <button mat-raised-button (click)="openCreateModal()" class="navi-buttons" color="primary">Create New
+            User</button>
         <button mat-raised-button routerLink="/dashboard" class="navi-buttons" color="accent">Back to Dashboard</button>
-        <table mat-table id="users" [dataSource]="dataSource">
+        <table mat-table id="users" [dataSource]="users$ | async">
             <div class="user-container">
                 <ng-container matColumnDef="firstName">
                     <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -29,15 +30,16 @@
                 <ng-container matColumnDef="deleteUser">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let user">
-                        <button mat-raised-button class="table-buttons" color="primary" routerLink="{{user.id}}/edit-user">Edit</button>
+                        <button mat-raised-button class="table-buttons" color="primary"
+                            routerLink="{{user.id}}/edit-user">Edit</button>
                     </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </div>
         </table>
-                
-         
-      
+
+
+
     </mat-card>
 </div>
