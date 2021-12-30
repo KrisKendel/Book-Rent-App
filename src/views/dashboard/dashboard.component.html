@@ -4,22 +4,21 @@
         <mat-card-header>
             <mat-card-title>Dashboard</mat-card-title>
         </mat-card-header>
-        <h1>Welcome {{admin.username}}!</h1>
+        <h1>Welcome {{ username }}!</h1>
         <form class="example-form">
             <mat-card-content>
                 <button mat-raised-button color="primary" routerLink="new-rental">New Rental</button>
                 <button mat-raised-button color="primary" routerLink="all-books">All Books</button>
                 <button mat-raised-button color="primary" routerLink="all-rentals">Rentals</button>
                 <button mat-raised-button color="primary" routerLink="all-users">Users</button>
-                
+
             </mat-card-content>
-            <h3><strong>Number of library users: </strong> {{ allUsers }}</h3>
-            <h3><strong>Number of rented books: </strong>{{ rentedBooks }}/{{ allBooks }}</h3>
+            <h3><strong>Number of library users: </strong> {{ (users$ | async)?.length }}</h3>
+            <h3><strong>Number of rented books: </strong>
+                {{ (rentedBooks$ | async)?.length }} / {{ (allBooks$ | async)?.length}}</h3>
         </form>
     </mat-card>
 </div>
 
-<div class="route-container" [@routeAnimations]="prepareRoute(outlet)">
-    <router-outlet #outlet="outlet"></router-outlet>
-</div>
 
+<router-outlet></router-outlet>

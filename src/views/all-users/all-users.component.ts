@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateUserComponent } from 'src/components/create-user-modal/create-user.component';
 import { UserService } from 'src/services/user/user.service';
 import { User } from 'src/models/user';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-all-users',
@@ -11,10 +12,9 @@ import { User } from 'src/models/user';
   styleUrls: ['./all-users.component.scss']
 })
 export class AllUsersComponent implements OnInit {
-  public users: User[];
-  public displayedColumns: string[] = ['firstName', 'lastName', 'dateCreate', 'deleteUser'];
-  public dataSource: any = [];
-  public userID: number;
+  users$: Observable<User[]>;
+  displayedColumns: string[] = ['firstName', 'lastName', 'dateCreate', 'deleteUser'];
+  userID: number;
 
   constructor(
     private dialog: MatDialog,
@@ -25,15 +25,8 @@ export class AllUsersComponent implements OnInit {
     this.getUsers();
   }
 
-  public async getUsers(): Promise<void> {
-    this.userService.getAllUsers()
-    .then((users) => {
-        this.users = users;
-        this.dataSource = new MatTableDataSource(this.users);
-      })
-     .catch(err => {
-        console.log(err);
-     });
+  getUsers(): void {
+    this.users$ = this.userService.getAllUsers();
   }
 
   openCreateModal(): void {

@@ -14,18 +14,19 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe]
 })
 export class EditBookComponent implements OnInit {
-  public bookIDValue: number;
-  public book: Book;
-  public bookFetch: any;
-  public title: string;
-  public authors: string;
-  public shortDescription: string;
-  public publishDate: string;
-  public availability = false;
-  public thumbnailUrl: string;
-  public bookEdit: any;
-  public addEditForm: FormGroup;
-  public url: string = this.bookService.url;
+  bookIDValue: number;
+  book: Book;
+  bookFetch: any;
+  title: string;
+  authors: string;
+  shortDescription: string;
+  publishDate: string;
+  availability = false;
+  thumbnailUrl: string;
+  bookEdit: any;
+  addEditForm: FormGroup;
+  url: string = this.bookService.url;
+  error: Error;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public bookID: object,
@@ -36,7 +37,7 @@ export class EditBookComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-   for (const id in this.bookID) {
+    for (const id in this.bookID) {
       if (this.bookID.hasOwnProperty(id)) {
         this.bookIDValue = this.bookID[id];
         if (this.bookIDValue) {
@@ -46,9 +47,9 @@ export class EditBookComponent implements OnInit {
     }
   }
 
-  private async fetchBook(bookID: number): Promise<void> {
+  fetchBook(bookID: number): void {
     this.bookService.getBook(bookID)
-      .then(book => {
+      .subscribe(book => {
         this.bookEdit = book;
         this.addEditForm = this.formBuilder.group({
           title: [this.bookEdit.title, [Validators.required]],
@@ -58,19 +59,15 @@ export class EditBookComponent implements OnInit {
           authors: [this.bookEdit.authors, [Validators.required]],
           availability: [this.bookEdit.availability]
         });
-      }).catch(err => {
-        console.log(err);
-      });
+      }, (error) => { this.error = error });
   }
 
-  public async onEditBook(): Promise <void> {
+  onEditBook(): void {
     this.bookService.editBook(this.bookIDValue, this.addEditForm.value)
-    .then((book: Book) => {
-      this.book = book;
-      this.router.navigateByUrl('/dashboard/all-books');
-    }).catch(err => {
-      console.log(err);
-    });
+      .subscribe((book: Book) => {
+        this.book = book;
+        this.router.navigateByUrl('/dashboard/all-books');
+      }, (error) => { this.error = error; });
   }
 
   closeDialog(): void {

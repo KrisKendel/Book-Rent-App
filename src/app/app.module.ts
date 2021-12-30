@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { StorageServiceModule } from 'ngx-webstorage-service';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -42,6 +41,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -86,10 +86,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatNativeDateModule,
     MatCheckboxModule,
     MatAutocompleteModule,
-    StorageServiceModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule,
   ],
-  providers: [ AuthGuard ],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

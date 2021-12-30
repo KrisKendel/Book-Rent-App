@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ReturnedBookComponent } from 'src/components/returned-book-modal/returned-book.component';
 import { Book } from 'src/models/book';
 import { BookService } from 'src/services/book-service/book.service';
@@ -11,12 +12,12 @@ import { BookService } from 'src/services/book-service/book.service';
   styleUrls: ['./all-rentals.component.scss']
 })
 export class AllRentalsComponent implements OnInit {
-  public rented: any;
-  public dataSource: any = [];
-  public displayedColumns: string[] = ['id', 'title', 'rented-to-date', 'user', 'returned-earlier'];
-  public allBooks: any;
-  public rentedBooks: Book[] = [];
-  public book: Book;
+  rented: any;
+  dataSource: any = [];
+  displayedColumns: string[] = ['id', 'title', 'rented-to-date', 'user', 'returned-earlier'];
+  allBooks: any;
+  rented$: Observable<Book[]>;
+  book: Book;
 
   constructor(
     private bookService: BookService,
@@ -27,27 +28,21 @@ export class AllRentalsComponent implements OnInit {
     this.getAllBooks();
   }
 
-  private async getAllBooks(): Promise<void> {
-    this.bookService.getAllBooks()
-      .then(data => {
-        this.allBooks = data;
-        for (const book of this.allBooks) {
-          if (book.availability === false) {
-             this.rentedBooks.push(book);
-          }
-        }
-        this.dataSource = new MatTableDataSource(this.rentedBooks);
-      }).catch(err => {
-        console.log(err);
-      });
+  getAllBooks(): void {
+    this.rented$ = this.bookService.getAllBooks().pipe(
+      map((el) => [...el].filter((book) => !book.availability)),
+    );
   }
-
-  applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+  // add filter
+  // applyFilter(event: Event): void {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  // }
 
   openReturnedBookModal(rented: any): void {
-     this.dialog.open(ReturnedBookComponent, { width: '640px', disableClose: true, data: { rented }});
+    const returnDialog = this.dialog.open(ReturnedBookComponent, { width: '640px', disableClose: true, data: { rented } });
+    returnDialog.afterClosed().subscribe((data) => {
+      this.bookService.editBook(data.id, data.formValue).subscribe();
+    });
   }
 }

@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Book } from 'src/models/book';
-import { BookService } from 'src/services/book-service/book.service';
 
 @Component({
   selector: 'app-returned-book',
@@ -10,14 +9,14 @@ import { BookService } from 'src/services/book-service/book.service';
   styleUrls: ['./returned-book.component.scss']
 })
 export class ReturnedBookComponent implements OnInit {
-  public returnedForm: FormGroup;
-  public rentedBook: Book;
+  returnedForm: FormGroup;
+  rentedBook: Book;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public rented: object,
     private dialog: MatDialog,
+    private dialogRef: MatDialogRef<any>,
     private formBuilder: FormBuilder,
-    private bookService: BookService
   ) { }
 
   ngOnInit(): void {
@@ -34,9 +33,13 @@ export class ReturnedBookComponent implements OnInit {
     });
   }
 
-  async onConfirmBookReturned(event): Promise<void> {
+  onConfirmBookReturned(event): void {
     event.stopPropagation();
-    this.bookService.editBook(this.rentedBook.id, this.returnedForm.value);
+    const data = {
+      id: this.rentedBook.id,
+      formValue: this.returnedForm.value,
+    };
+    this.dialogRef.close(data);
   }
 
   closeDialog(): void {

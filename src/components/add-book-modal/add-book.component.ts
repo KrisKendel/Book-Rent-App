@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
-import { Book } from 'src/models/book';
 import { BookService } from 'src/services/book-service/book.service';
 
 @Component({
@@ -11,23 +9,21 @@ import { BookService } from 'src/services/book-service/book.service';
   styleUrls: ['./add-book.component.scss']
 })
 export class AddBookComponent implements OnInit {
-  public addCreateForm: FormGroup;
-  public title: string;
-  public authors: Array<string>;
-  public shortDescription: string;
-  public publishDate: string;
-  public availability: boolean;
-  public newBook: Book;
-  public thumbnailUrl: string;
-  public rentedFrom: string;
-  public availableAfter: string;
-  public url: string = this.bookService.url;
+  addCreateForm: FormGroup;
+  title: string;
+  authors: Array<string>;
+  shortDescription: string;
+  publishDate: string;
+  availability: boolean;
+  thumbnailUrl: string;
+  rentedFrom: string;
+  availableAfter: string;
+  url: string = this.bookService.url;
 
   constructor(
     private formBuilder: FormBuilder,
-    public dialog: MatDialog,
-    public http: HttpClient,
-    public bookService: BookService
+    private dialog: MatDialog,
+    private bookService: BookService
   ) { }
 
   ngOnInit(): void {
@@ -43,9 +39,8 @@ export class AddBookComponent implements OnInit {
       rentedTo: ['']
     });
   }
-  public async onCreateBook(): Promise<void> {
-     this.newBook = this.addCreateForm.value;
-     this.bookService.createBook(this.newBook);
+  onCreateBook(): void {
+    this.bookService.createBook(this.addCreateForm.value).subscribe();
   }
 
   closeDialog(): void {

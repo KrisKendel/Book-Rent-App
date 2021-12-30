@@ -1,30 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    public usersUrl = 'http://localhost:3000/users';
+    usersUrl = 'http://localhost:3000/users';
 
     constructor(private http: HttpClient) { }
 
-    async getAllUsers(): Promise<User[]> {
-        return this.http.get<User[]>(`${this.usersUrl}`).toPromise();
+    getAllUsers(): Observable<User[]> {
+        return this.http.get<User[]>(`${this.usersUrl}`);
     }
 
-    async getUser(userID: number): Promise<User> {
-        return this.http.get<User>(`${this.usersUrl}/${userID}`).toPromise();
+    getUser(userID: number): Observable<User> {
+        return this.http.get<User>(`${this.usersUrl}/${userID}`);
     }
 
-    async createUser(newUser: User): Promise<void> {
-        await this.http.post(`${this.usersUrl}`, newUser).toPromise();
+    createUser(newUser: User): Observable<any> {
+        return this.http.post(`${this.usersUrl}`, newUser);
     }
 
-    async deleteUser(userID: number): Promise<void> {
-        await this.http.delete(`${this.usersUrl}/${userID}`).toPromise();
+    deleteUser(userID: number): Observable<any> {
+        return this.http.delete(`${this.usersUrl}/${userID}`);
     }
 
-    async editUser(userID: number, editFormValue): Promise<User> {
-        return this.http.patch<User>(`${this.usersUrl}/${userID}`, editFormValue).toPromise();
+    editUser(userID: number, editFormValue): Observable<User> {
+        return this.http.patch<User>(`${this.usersUrl}/${userID}`, editFormValue);
     }
 }

@@ -7,14 +7,14 @@
         <mat-form-field>
           <mat-select placeholder="Library User" formControlName="userID" required>
             <mat-option>---</mat-option>
-            <mat-option *ngFor="let user of users" [value]="user.id">{{ user.firstName + ' ' + user.lastName }}
+            <mat-option *ngFor="let user of users$ | async" [value]="user.id">{{ user.firstName + ' ' + user.lastName }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field>
           <mat-select placeholder="Book Title" formControlName="id" required>
             <mat-option>---</mat-option>
-            <mat-option *ngFor="let book of books" [value]="book.id">
+            <mat-option *ngFor="let book of availableBooks$ | async" [value]="book.id">
               {{ book.title }}
             </mat-option>
           </mat-select>
