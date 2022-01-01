@@ -42,6 +42,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -88,6 +89,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatAutocompleteModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatPaginatorModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

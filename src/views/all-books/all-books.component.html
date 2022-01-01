@@ -5,13 +5,13 @@
             <mat-card-title>All Books</mat-card-title>
         </mat-card-header>
 
-        <!-- <mat-form-field>
+        <mat-form-field>
             <mat-label>Search Books</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-        </mat-form-field> -->
+        </mat-form-field>
         <button mat-raised-button (click)="openModal()" class="navi-buttons" color="primary">Create New Book</button>
         <button mat-raised-button routerLink="/dashboard" class="navi-buttons" color="accent">Back to Dashboard</button>
-        <table mat-table id="books" [dataSource]="books$ | async">
+        <table mat-table id="books" [dataSource]="dataSource">
             <div class="book-container">
                 <ng-container matColumnDef="authors">
                     <th mat-header-cell *matHeaderCellDef> Authors </th>
@@ -42,5 +42,8 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </div>
         </table>
+        <mat-paginator [length]="dataSource?.data?.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page">
+        </mat-paginator>
     </mat-card>
 </div>
